@@ -14,6 +14,7 @@ class CustomCard extends StatelessWidget {
       required this.address,
       required this.price,
       required this.flatUrl,
+
       Key? key})
       : super(key: key);
 
@@ -142,6 +143,6 @@ class CustomCard extends StatelessWidget {
           ),
         ),
       ],
-    ); //,
+    );
   }
 }
