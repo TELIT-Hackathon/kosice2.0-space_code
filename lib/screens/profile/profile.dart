@@ -24,6 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
   late List<Widget> _optionsList;
   late WebService _webService;
+  String loggedUser = '';
   User? _userData;
   bool _isError = false;
 
@@ -35,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
   }
 
   void updateScreen() {
-    _webService.getUserDetail().then(
+    _webService.getUserDetail(loggedUser).then(
       (res) {
         setState(() {
           _isError = false;
@@ -46,11 +47,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
               title: 'Nastavenia profilu',
               subTitle: 'Aktualizácie a úprava tvojho profilu',
               route: '/profileSettings',
-              // args: ProfileSettingsArgs(_userData),
             ),
             const Option(
-              title: 'Preferencie',
-              subTitle: 'Nastavenia notifikácií a iné',
+              title: 'Nastavenia vyhľadávania',
+              subTitle: 'Tvoje preferencie o bývaní na jednom miete',
               route: '/preferences',
             ),
             const Option(
@@ -209,15 +209,12 @@ class Option extends StatelessWidget {
   final String route;
   final bool addDivider;
 
-  // final ProfileSettingsArgs? args;
-
   const Option({
     Key? key,
     required this.title,
     required this.subTitle,
     required this.route,
     this.addDivider = true,
-    // this.args,
   }) : super(key: key);
 
   @override
@@ -228,7 +225,6 @@ class Option extends StatelessWidget {
         Navigator.pushNamed(
           context,
           route,
-          // arguments: args,
         );
       },
       child: Container(

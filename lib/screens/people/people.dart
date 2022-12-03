@@ -111,9 +111,8 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
                           Navigator.pushNamed(
                             context,
                             '/peopleDetail',
-                            arguments: PeopleDetailArgs(
-                              _peoples[index].id,
-                            ),
+                            arguments:
+                                PeopleDetailArgs(_peoples[index].id, true),
                           ),
                         },
                         child: Padding(
@@ -391,6 +390,7 @@ class _SavedScreenState extends State<SavedScreen>
                             '/peopleDetail',
                             arguments: PeopleDetailArgs(
                               _peoples[index].id,
+                              false,
                             ),
                           ),
                         },
@@ -602,7 +602,7 @@ class UserPhotos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

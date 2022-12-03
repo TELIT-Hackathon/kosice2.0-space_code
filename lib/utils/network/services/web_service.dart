@@ -20,9 +20,9 @@ class WebService {
 //   );
 // }
 
-  Future<User> getUserDetail() async {
+  Future<User> getUserDetail(String userId) async {
     final response = await _helper.get(
-      "auth/detail",
+      "customer/${userId}",
     );
     return User.fromJson(response['content']);
   }
