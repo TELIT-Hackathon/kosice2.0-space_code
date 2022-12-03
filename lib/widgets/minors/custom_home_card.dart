@@ -43,8 +43,12 @@ class CustomCard extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
-                                  'https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0'),
+                              SizedBox(
+                                width: MediaQuery. of(context). size. width,
+                                height: 130,
+                                child: Image.network(
+                                    'https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0'),
+                              ),
                             ],
                           ),
                         ),
