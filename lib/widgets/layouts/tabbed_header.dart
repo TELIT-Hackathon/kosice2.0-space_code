@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/texts/header.dart';
 
-
 class TabbedHeader extends StatefulWidget {
   final String title;
   final List<String> tabTitles;
@@ -46,7 +45,7 @@ class _TabbedHeaderState extends State<TabbedHeader>
           SliverAppBar(
             elevation: 0,
             actions: widget.actions,
-            backgroundColor: AppColors.defaultColor,
+            backgroundColor: AppColors.white,
             title: Header(
               text: widget.title,
               horizontalPadding: 0,
@@ -83,9 +82,9 @@ class _TabbedHeaderState extends State<TabbedHeader>
                       tabs: widget.tabTitles
                           .map(
                             (title) => Tab(
-                          text: title,
-                        ),
-                      )
+                              text: title,
+                            ),
+                          )
                           .toList(),
                     ),
                   ],

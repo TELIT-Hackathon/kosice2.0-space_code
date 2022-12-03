@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_app/bottom_navigator.dart';
 import 'package:living_app/screens/dashboard/dashboard.dart';
+import 'package:living_app/screens/people/people.dart';
+import 'package:living_app/screens/people/people_detail.dart';
+import 'package:living_app/screens/profile/profile.dart';
 import 'package:living_app/utils/colors.dart';
 
 Future<void> main() async {
@@ -57,8 +60,9 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
       routes: {
         '/home': (context) => const BottomNavigator(),
         '/dashboard': (context) => const DashboardScreen(),
-        '/people': (context) => const DashboardScreen(),
-        '/profile': (context) => const DashboardScreen(),
+        '/people': (context) => const PeopleScreen(),
+        '/peopleDetail': (context) => const PeopleDetailScreen(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }

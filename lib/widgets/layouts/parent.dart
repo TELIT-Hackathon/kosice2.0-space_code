@@ -8,7 +8,7 @@ class Parent extends StatelessWidget {
   const Parent({
     Key? key,
     required this.child,
-    this.background = AppColors.defaultColor,
+    this.background = AppColors.white,
   }) : super(key: key);
 
   @override
