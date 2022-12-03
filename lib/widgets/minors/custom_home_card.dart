@@ -7,11 +7,13 @@ class CustomCard extends StatelessWidget {
   final String name;
   final String address;
   final String price;
+  final String flatUrl;
 
   const CustomCard(
       {required this.name,
       required this.address,
       required this.price,
+      required this.flatUrl,
       Key? key})
       : super(key: key);
 
@@ -32,26 +34,30 @@ class CustomCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(
-                            color: AppColors.white,
+                        decoration: BoxDecoration(
+                            color: AppColors.secondary.withOpacity(0.1),
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
                             )),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
+                        child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                width: MediaQuery. of(context). size. width,
-                                height: 130,
-                                child: Image.network(
-                                    'https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0'),
-                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                ),
+                                child:
+                                Image.network(
+                                  flatUrl,
+                                  height: 160.0,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
                             ],
                           ),
-                        ),
                       ),
                     ),
                   ],
@@ -63,7 +69,7 @@ class CustomCard extends StatelessWidget {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.secondary.withOpacity(0.1),
+                          color: AppColors.defaultColor,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(20),
                             bottomRight: Radius.circular(20),
@@ -118,7 +124,7 @@ class CustomCard extends StatelessWidget {
                                     children: [
                                       VarText(
                                         text: '$price €',
-                                        color: Colors.red,
+                                        color: AppColors.black,
                                       )
                                     ],
                                   )
