@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:living_app/utils/colors.dart';
-import 'package:living_app/widgets/minors/custom_divider.dart';
+import 'package:living_app/widgets/texts/rich_text.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 
 class CustomCard extends StatelessWidget {
   final String name;
   final String address;
-  final String price;
+  final double price;
   final String flatUrl;
 
   const CustomCard(
@@ -63,7 +63,6 @@ class CustomCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                CustomDivider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -92,10 +91,10 @@ class CustomCard extends StatelessWidget {
                                           left: 4,
                                         ),
                                         child: VarText(
-                                          size: 14,
                                           textAlign: TextAlign.left,
-                                          text: 'Názov: $name',
-                                          color: AppColors.black,
+                                          text: '$name',
+                                          color: AppColors.secondary,
+                                          size: 18,
                                         ),
                                       ),
                                     ],
@@ -103,14 +102,14 @@ class CustomCard extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: EdgeInsets.only(top: 4,bottom: 4,
                                           left: 4,
                                         ),
                                         child: VarText(
-                                          size: 14,
                                           textAlign: TextAlign.left,
-                                          text: 'Adresa: $address',
-                                          color: AppColors.black,
+                                          text: '$address',
+                                          color: AppColors.secondary,
+                                          size: 14,
                                         ),
                                       ),
                                     ],
@@ -123,10 +122,15 @@ class CustomCard extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      VarText(
-                                        text: '$price €',
-                                        color: AppColors.black,
-                                      )
+                                      RichTextCustom(
+                                        firstText: '$price €',
+                                        secondText: ' / mesiac',
+                                      size: 21,
+                                      horizontalPadding: 4,
+                                        firstColor: AppColors.secondary,
+                                        secondColor: AppColors.secondary,
+                                      ),
+
                                     ],
                                   )
                                 ],

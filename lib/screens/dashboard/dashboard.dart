@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:living_app/widgets/inputs/search_input.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
+import 'package:living_app/widgets/minors/custom_home_card.dart';
+import 'package:living_app/widgets/inputs/search_input.dart';
 import 'package:living_app/widgets/texts/header.dart';
-import 'package:living_app/widgets/texts/sub_header.dart';
+
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -25,10 +26,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Parent(
       child: Column(
         children: [
-          const Header(text: 'Aktuálne ponuky'),
-          const SubHeader(text: 'na základe tvojích preferencií'),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: SearchInput(
               controller: _searchController,
               placeholder: 'Začni vyhľadávať...',
@@ -36,6 +35,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onClear: () {},
             ),
           ),
+          const Header(text: 'Ponuky pre teba'),
+
+          GestureDetector(
+              child: CustomCard(
+                  name: 'trojizbovy byts',
+                  address: 'hronska 69',
+                  price: 200.0,
+                  flatUrl: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),
+            behavior: HitTestBehavior.translucent,
+            onTap: () => {
+              Navigator.pushNamed(
+                context,
+                '/accomodationDetail',
+                                ),
+            },
+          )
         ],
       ),
     );

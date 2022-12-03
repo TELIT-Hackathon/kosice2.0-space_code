@@ -55,7 +55,7 @@ class RichTextCustom extends StatelessWidget {
                 color: secondColor,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
-                fontSize: size,
+                fontSize: size*0.6,
               ),
             ),
           ],
