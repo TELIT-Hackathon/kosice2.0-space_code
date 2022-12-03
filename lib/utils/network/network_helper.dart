@@ -8,9 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:living_app/utils/network/exceptions/app_exception.dart';
 
 class ApiBaseHelper {
-  static const _backendBaseUrlRaw = 'api-dev.spliti.sk';
+  static const _backendBaseUrlRaw = '317d-147-232-39-52.eu.ngrok.io';
   static const _backendBaseUrl = 'https://$_backendBaseUrlRaw/';
-  static const _externalBaseUrl = 'https://ekasa.financnasprava.sk/';
 
   Future<dynamic> get(String path, {Map<String, String>? queryParams}) async {
     var responseJson;
@@ -48,13 +47,12 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> post(String path, dynamic body,
-      {bool doAuth = true, bool isExternal = false}) async {
+  Future<dynamic> post(String path, dynamic body, {bool doAuth = true}) async {
     var responseJson;
 
     try {
       final response = await http.post(
-        Uri.parse((isExternal ? _externalBaseUrl : _backendBaseUrl) + path),
+        Uri.parse((_backendBaseUrl) + path),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
