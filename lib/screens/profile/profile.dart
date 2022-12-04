@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
             const Option(
               title: 'Nastavenia vyhľadávania',
               subTitle: 'Tvoje preferencie o bývaní na jednom miete',
-              route: '/preferences',
+              route: '/profilePreferences',
             ),
             const Option(
               title: 'Zmena hesla',

@@ -26,6 +26,9 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
   bool isChecked6 = false;
   bool isChecked7 = false;
   bool isChecked8 = false;
+  bool isChecked9 = false;
+  bool isChecked10 = false;
+  bool isChecked11 = false;
 
   double value = 0;
   double _value = 0;
@@ -78,21 +81,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                             color: AppColors.secondary,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 4),
-                          child: Row(
-                            children: [
-                              //DatePicker(date: '01.01.1997', icon: Icons.date_range_outlined, onChange: onChange () {} ),
-                              Icon(Icons.person_outline,
-                                color: AppColors.secondary,
-                                size: 18,),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: VarText(text: 'Vek: 28'),
-                              ),
-                            ],
-                          ),
-                        ),
+                        
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: SubHeader(text: 'Preferencie'),
@@ -120,7 +109,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                         },),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
-                          child: SubHeader(text: 'Typ'),
+                          child: SubHeader(text: 'Typ b7vania'),
                         ),
                         Row(
                           children: [
@@ -133,7 +122,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(left: 8.0),
-                                        child: VarText(text: 'Dom'),
+                                        child: VarText(text: 'Samostatne'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(right: 8.0),
@@ -156,7 +145,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(left: 8.0),
-                                        child: VarText(text: 'Byt'),
+                                        child: VarText(text: 'Zdieľane'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(right: 8.0),
@@ -179,7 +168,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
 
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
-                          child: SubHeader(text: 'Stav'),
+                          child: SubHeader(text: 'Lokalita'),
                         ),
 
                         Row(
@@ -194,7 +183,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       children: [
                                         Padding(
                                             padding: const EdgeInsets.only(left: 8.0),
-                                            child: VarText(text: 'Kompletná rekonštrukcia'),
+                                            child: VarText(text: 'Košice-Barca'),
                                           ),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 8.0),
@@ -216,7 +205,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 8.0),
-                                          child: VarText(text: 'Novostavba'),
+                                          child: VarText(text: 'Košice-Juh'),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 8.0),
@@ -238,7 +227,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 8.0),
-                                          child: VarText(text: 'Čiastočná rekonštrukcia'),
+                                          child: VarText(text: 'Košice-Sever'),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 8.0),
@@ -252,14 +241,15 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                         ),
                                       ],
                                     ),
-                                  ),Padding(
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.only(left: 16.0, top: 4),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 8.0),
-                                          child: VarText(text: 'Pôvodný stav'),
+                                          child: VarText(text: 'Košice-Staré Mesto'),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 8.0),
@@ -274,10 +264,54 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       ],
                                     ),
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: VarText(text: 'Košice-Ťahanovce'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 8.0),
+                                          child: Checkbox(value: isChecked7,
+                                              activeColor: AppColors.primary,
+                                              onChanged: (bool? value) {
+                                                setState(() {
+                                                  isChecked7 = value!;
+                                                });}
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: VarText(text: 'Košice-Západ'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 8.0),
+                                          child: Checkbox(value: isChecked8,
+                                              activeColor: AppColors.primary,
+                                              onChanged: (bool? value) {
+                                                setState(() {
+                                                  isChecked8 = value!;
+                                                });}
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
-                                    child: SubHeader(text: 'Sociálne zariadenia'),
+                                    child: SubHeader(text: 'Vzdelanie'),
                                   ),
 
                                   Row(
@@ -291,15 +325,59 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 8.0),
-                                                  child: VarText(text: 'Nemocnica'),
+                                                  child: VarText(text: 'Materská škola'),
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(right: 8.0),
-                                                  child: Checkbox(value: isChecked7,
+                                                  child: Checkbox(value: isChecked9,
                                                       activeColor: AppColors.primary,
                                                       onChanged: (bool? value) {
                                                         setState(() {
-                                                          isChecked7 = value!;
+                                                          isChecked9 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: VarText(text: 'Základná škola'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked10,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked10 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: VarText(text: 'Stredná škola'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked11,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked11 = value!;
                                                         });}
                                                   ),
                                                 ),
@@ -308,27 +386,12 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                           ),
 
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0),
-                                                  child: VarText(text: 'Pošta'),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
-                                                  child: Checkbox(value: isChecked8,
-                                                      activeColor: AppColors.primary,
-                                                      onChanged: (bool? value) {
-                                                        setState(() {
-                                                          isChecked8 = value!;
-                                                        });}
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                            padding: const EdgeInsets.only(top: 8.0),
+                                            child: SubHeader(text: 'Doprava'),
                                           ),
+                                          
+
+                                          
                                         ],
 
                                       ),),

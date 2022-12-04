@@ -70,7 +70,7 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           padding: const EdgeInsets.only(left: 16.0, top: 4),
                           child: Row(
                             children: [
-                              //DatePicker(date: '01.01.1997', icon: Icons.date_range_outlined, onChange: onChange () {} ),
+
                               Icon(Icons.person_outline,
                                 color: AppColors.secondary,
                                 size: 18,),

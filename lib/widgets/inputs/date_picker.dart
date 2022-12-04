@@ -1,60 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:living_app/utils/colors.dart';
+import 'package:living_app/widgets/texts/var_text.dart';
 
-class BasicInput extends StatelessWidget {
-  final String placeholder;
-  final TextEditingController controller;
-  final Icon icon;
-  final TextInputAction textInputAction;
-  final TextCapitalization textCapitalization;
 
-  const BasicInput({
+class DatePicker extends StatelessWidget {
+  final String? date;
+  final IconData icon;
+  final ValueChanged<String?> onChange;
+
+  const DatePicker({
     Key? key,
-    required this.controller,
-    required this.placeholder,
+    required this.date,
     required this.icon,
-    this.textInputAction = TextInputAction.done,
-    this.textCapitalization = TextCapitalization.sentences,
+    required this.onChange,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Material(
-            borderRadius: BorderRadius.circular(20),
-            elevation: 2,
-            color: AppColors.white,
-            child: TextFormField(
-              style: const TextStyle(
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-              controller: controller,
-              textCapitalization: textCapitalization,
-              textInputAction: textInputAction,
-              maxLines: 1,
-              cursorColor: AppColors.primary,
-              decoration: InputDecoration(
-                prefixIcon: icon,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.white),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primary),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                filled: true,
-                hintText: placeholder,
-                fillColor: AppColors.white,
-              ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: AppColors.white,
+        minimumSize: const Size.fromHeight(56),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: AppColors.secondary,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: VarText(
+              color: date != null ? AppColors.black : AppColors.tertiary,
+              text: date ?? '25.5.1997',
             ),
           ),
-        ),
-      ],
+        ],
+      ),
+      onPressed: () => onPressedPicker(context, onChange),
     );
   }
+
+  onPressedPicker(BuildContext context, ValueChanged<String?> onChange) => {
+    showDatePicker(
+      helpText: '',
+      locale: const Locale("sk"),
+      confirmText: 'Potvrdiť',
+      cancelText: 'Zrušiť',
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.primary,
+              onPrimary: AppColors.white,
+              surface: AppColors.primary,
+              onSurface: AppColors.secondary,
+            ),
+            dialogBackgroundColor: AppColors.white,
+          ),
+          child: child!,
+        );
+      },
+    ).then(
+          (value) {
+        if (value != null) {
+          onChange(
+            DateFormat("dd.MM.yyyy").format(value),
+          );
+        }
+      },
+    ),
+  };
 }
