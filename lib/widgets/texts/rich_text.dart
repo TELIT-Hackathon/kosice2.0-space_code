@@ -6,8 +6,8 @@ class RichTextCustom extends StatelessWidget {
   final String secondText;
   final Color firstColor;
   final Color secondColor;
-  final int maxLines;
   final double size;
+  final int maxLines;
   final double verticalPadding;
   final double horizontalPadding;
   final Alignment alignment;
@@ -18,8 +18,8 @@ class RichTextCustom extends StatelessWidget {
         required this.firstText,
         required this.secondText,
         this.maxLines = 2,
-        this.size = 28,
         this.firstColor = AppColors.black,
+        this.size = 28,
         this.secondColor = AppColors.primary,
         this.verticalPadding = 8,
         this.horizontalPadding = 16,
@@ -55,7 +55,7 @@ class RichTextCustom extends StatelessWidget {
                 color: secondColor,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
-                fontSize: size*0.6,
+                fontSize: size,
               ),
             ),
           ],
