@@ -1,1 +1,27 @@
+server:
+  address: 0.0.0.0
+  port: 8080
 
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    config:
+      enabled: false
+
+minio:
+  endpoint: https://s3.spacecode.sk
+  accessKey: spliti
+  secret: vf4xh_aaZFQGf2oKU67VhtmsFEHDGY-Cz6zG.Wtyhqu8fhiddh.ut6CV9C4J2taw
+  bucketName: spliti
