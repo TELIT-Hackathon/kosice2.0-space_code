@@ -7,14 +7,14 @@ import 'package:living_app/widgets/texts/header.dart';
 import 'package:living_app/widgets/texts/sub_header.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 
-class FourthWizard extends StatefulWidget {
-  const FourthWizard({Key? key}) : super(key: key);
+class FifthWizard extends StatefulWidget {
+  const FifthWizard({Key? key}) : super(key: key);
 
   @override
-  State<FourthWizard> createState() => _FourthWizardState();
+  State<FifthWizard> createState() => _FifthWizardState();
 }
 
-class _FourthWizardState extends State<FourthWizard> {
+class _FifthWizardState extends State<FifthWizard> {
   bool _isCheckedFirst = false;
   bool _isCheckedSecond = false;
   bool _isCheckedThird = false;
@@ -31,7 +31,7 @@ class _FourthWizardState extends State<FourthWizard> {
       child: Column(
         children: [
           const ActionBar(),
-          const Header(text: '4. Vybavenosť'),
+          const Header(text: '5. Spolubývajúci'),
           const SubHeader(
             text: 'Čo by nemalo chýbať v okolí ?',
             maxLines: 2,
@@ -86,7 +86,7 @@ class _FourthWizardState extends State<FourthWizard> {
                     children: [
                       const VarText(
                         color: AppColors.secondary,
-                        text: 'Základná škola',
+                        text: 'Stredná škola',
                         size: 18,
                       ),
                       Checkbox(
@@ -105,7 +105,7 @@ class _FourthWizardState extends State<FourthWizard> {
                     children: [
                       const VarText(
                         color: AppColors.secondary,
-                        text: 'Stredná škola',
+                        text: 'Umelecká škola',
                         size: 18,
                       ),
                       Checkbox(
