@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:living_app/bottom_navigator.dart';
 import 'package:living_app/screens/dashboard/accommodation_detail.dart';
 import 'package:living_app/screens/dashboard/dashboard.dart';
+import 'package:living_app/screens/dashboard/wizard/final.dart';
 import 'package:living_app/screens/dashboard/wizard/first.dart';
 import 'package:living_app/screens/dashboard/wizard/fourth.dart';
 import 'package:living_app/screens/dashboard/wizard/second.dart';
@@ -73,6 +74,7 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
         '/secondWizard': (context) => const SecondWizard(),
         '/thirdWizard': (context) => const ThirdWizard(),
         '/fourthWizard': (context) => const FourthWizard(),
+        '/finalWizard': (context) => const FinalWizard(),
         '/people': (context) => const PeopleScreen(),
         '/peopleDetail': (context) => const PeopleDetailScreen(),
         '/profile': (context) => const ProfileScreen(),

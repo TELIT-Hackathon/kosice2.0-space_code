@@ -10,6 +10,14 @@ class Education {
         'primarySchool': primarySchool,
         'highSchool': highSchool,
       };
+
+  factory Education.fromJson(Map<String, dynamic> json) {
+    return Education(
+      json['kindergarten'],
+      json['primarySchool'],
+      json['highSchool'],
+    );
+  }
 }
 
 class FreeTime {
@@ -24,6 +32,14 @@ class FreeTime {
         'cinema': cinema,
         'sport': sport,
       };
+
+  factory FreeTime.fromJson(Map<String, dynamic> json) {
+    return FreeTime(
+      json['theater'],
+      json['cinema'],
+      json['sport'],
+    );
+  }
 }
 
 class Transportation {
@@ -38,19 +54,27 @@ class Transportation {
         'nonMotor': nonMotor,
         'motor': motor,
       };
+
+  factory Transportation.fromJson(Map<String, dynamic> json) {
+    return Transportation(
+      json['publicTransport'],
+      json['nonMotor'],
+      json['motor'],
+    );
+  }
 }
 
 class RentPreferences {
-  final RoommatePreferences roommatePreferences;
-  final List<String> locality;
-  final int maxPrice;
-  final Education education;
-  final Transportation transportation;
-  final FreeTime freeTime;
+  final RoommatePreferences? roommatePreferences;
+  final List<String>? cityParts;
+  final int? maxPrice;
+  final Education? education;
+  final Transportation? transportation;
+  final FreeTime? freeTime;
 
   RentPreferences(
     this.roommatePreferences,
-    this.locality,
+    this.cityParts,
     this.maxPrice,
     this.education,
     this.transportation,
@@ -58,32 +82,52 @@ class RentPreferences {
   );
 
   Map<String, dynamic> toJson() => {
-        'roommatePreferences': roommatePreferences.toJson(),
-        'locality': locality,
+        'roommatePreferences': roommatePreferences?.toJson(),
+        'cityParts': cityParts,
         'maxPrice': maxPrice,
-        'education': education.toJson(),
-        'transportation': transportation.toJson(),
-        'freeTime': freeTime.toJson(),
+        'education': education?.toJson(),
+        'transportation': transportation?.toJson(),
+        'freeTime': freeTime?.toJson(),
       };
+
+  factory RentPreferences.fromJson(Map<String, dynamic> json) {
+    return RentPreferences(
+      RoommatePreferences.fromJson(json['roommatePreferences']),
+      json['cityParts'],
+      json['maxPrice'],
+      Education.fromJson(json['education']),
+      Transportation.fromJson(json['transportation']),
+      FreeTime.fromJson(json['freeTime']),
+    );
+  }
 }
 
 class RoommatePreferences {
   final String? nationality;
-  final int minAge;
-  final int maxAge;
+  final String? ageFrom;
+  final String? ageTo;
   final String? gender;
 
   RoommatePreferences(
     this.nationality,
-    this.minAge,
-    this.maxAge,
+    this.ageFrom,
+    this.ageTo,
     this.gender,
   );
 
   Map<String, dynamic> toJson() => {
         'nationality': nationality,
-        'minAge': minAge,
-        'maxAge': maxAge,
+        'ageFrom': ageFrom,
+        'ageTo': ageTo,
         'gender': gender,
       };
+
+  factory RoommatePreferences.fromJson(Map<String, dynamic> json) {
+    return RoommatePreferences(
+      json['nationality'],
+      json['ageFrom'],
+      json['ageTo'],
+      json['gender'],
+    );
+  }
 }
