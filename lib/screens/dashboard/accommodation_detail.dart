@@ -138,7 +138,7 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,25 +178,40 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                                 padding: const EdgeInsets.only(left: 8.0),
                                                 child: VarText(
                                                   text:
-                                                  '${_rent!.street} ${_rent!.houseNumber}, ${_rent!.city}',
+                                                  '${_rent!.street} ${_rent!.houseNumber},',
                                                   color: AppColors.secondary,
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 16, top: 8),
+                                              child: VarText(
+                                                text:
+                                                ' ${_rent!.city}',
+                                                color: AppColors.secondary,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
 
-                          ActionButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                '/profileAnother',);
-                            },
-                            color: AppColors.primary,
-                            text: 'Kontaktovať',
-                          ),
+                                 Padding(
+                                   padding: const EdgeInsets.only(top: 8.0),
+                                   child: ActionButton(
+                                onPressed: () {
+                                Navigator.pushNamed(
+                                    context,
+                                    '/profileAnother',);
+                              },
+                              color: AppColors.primary,
+                              text: 'Kontaktovať',
+                            ),
+                                 ),
                                   ],
                                 ),
 
