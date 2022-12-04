@@ -34,11 +34,12 @@ class _ThirdWizardState extends State<ThirdWizard> {
           const ActionBar(),
           const Header(text: '3. Cena'),
           const SubHeader(text: 'Vyber si za koľko chceš bývať'),
-
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-                child: RichTextCustom(alignment: Alignment.center,
-                    firstText: 'do ', secondText: '$newvalue €'),
+            child: RichTextCustom(
+                alignment: Alignment.center,
+                firstText: 'do ',
+                secondText: '$newvalue €'),
           ),
           Slider.adaptive(
             activeColor: AppColors.primary,
@@ -51,7 +52,8 @@ class _ThirdWizardState extends State<ThirdWizard> {
                 _value = value;
                 newvalue = _value.toInt();
               });
-            },),
+            },
+          ),
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
