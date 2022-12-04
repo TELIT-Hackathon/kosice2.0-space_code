@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_app/bottom_navigator.dart';
+import 'package:living_app/screens/dashboard/accommodation_detail.dart';
 import 'package:living_app/screens/dashboard/dashboard.dart';
+import 'package:living_app/screens/dashboard/wizard/first.dart';
+import 'package:living_app/screens/dashboard/wizard/fourth.dart';
+import 'package:living_app/screens/dashboard/wizard/second.dart';
+import 'package:living_app/screens/dashboard/wizard/third.dart';
 import 'package:living_app/screens/people/people.dart';
 import 'package:living_app/screens/people/people_detail.dart';
 import 'package:living_app/screens/profile/profile.dart';
@@ -60,6 +65,11 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
       routes: {
         '/home': (context) => const BottomNavigator(),
         '/dashboard': (context) => const DashboardScreen(),
+        '/accommodationDetail': (context) => const AccommodationDetail(),
+        '/firstWizard': (context) => const FirstWizard(),
+        '/secondWizard': (context) => const SecondWizard(),
+        '/thirdWizard': (context) => const ThirdWizard(),
+        '/fourthWizard': (context) => const FourthWizard(),
         '/people': (context) => const PeopleScreen(),
         '/peopleDetail': (context) => const PeopleDetailScreen(),
         '/profile': (context) => const ProfileScreen(),

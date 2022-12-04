@@ -30,6 +30,13 @@ class WebService {
     return rents.map((e) => Rent.fromJson(e)).toList();
   }
 
+  Future<Rent> getRentById(String rentId) async {
+    final response = await _helper.get(
+      "rent/$rentId",
+    );
+    return Rent.fromJson(response['content']);
+  }
+
   Future<User> getUserDetail(String userId) async {
     final response = await _helper.get(
       "customer/$userId",

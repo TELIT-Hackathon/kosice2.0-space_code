@@ -24,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
   late List<Widget> _optionsList;
   late WebService _webService;
-  String loggedUser = '';
+  String loggedUser = '5224de3f-23d0-49ba-8ff4-b22698f73921';
   User? _userData;
   bool _isError = false;
 
@@ -141,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                                       defaultRadius: 32,
                                       defaultFontSize: 21,
                                       defaultContent:
-                                          '${_userData!.firstName[0]}${_userData!.surName[0]}',
+                                          '${_userData!.firstName[0]}${_userData!.lastName[0]}',
                                       width: 64,
                                       height: 64,
                                     ),
@@ -152,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                                     children: [
                                       VarText(
                                         text: '${_userData!.firstName}'
-                                            ' ${_userData!.surName}',
+                                            ' ${_userData!.lastName}',
                                         color: AppColors.black,
                                         size: 24,
                                       ),

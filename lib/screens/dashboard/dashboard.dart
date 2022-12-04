@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:living_app/main.dart';
 import 'package:living_app/models/rent.dart';
+import 'package:living_app/screens/dashboard/accommodation_detail.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/utils/network/request_helper.dart';
 import 'package:living_app/utils/network/services/web_service.dart';
+import 'package:living_app/widgets/buttons/icon_button_custom.dart';
 import 'package:living_app/widgets/inputs/search_input.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/minors/custom_home_card.dart';
@@ -68,7 +70,25 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
               onClear: () {},
             ),
           ),
-          const Header(text: 'Ponuky pre teba'),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Header(text: 'Ponuky pre teba'),
+                IconButtonCustom(
+                  icon: const Icon(Icons.filter_list_rounded,
+                      color: AppColors.secondary),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/firstWizard',
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
           _rents.isNotEmpty
               ? Expanded(
                   child: RefreshIndicator(
@@ -88,13 +108,16 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
                           onTap: () => {
                             Navigator.pushNamed(
                               context,
-                              '/accomodationDetail',
+                              '/accommodationDetail',
+                              arguments:
+                                  AccommodationDetailArgs(_rents[index].id),
                             ),
                           },
                           child: CustomCard(
-                            name: '${_rents[index].name?.substring(0, 18)}',
+                            name: '${_rents[index].rentType}',
                             address:
                                 '${_rents[index].street} ${_rents[index].houseNumber}, ${_rents[index].city}',
+                            state: '${_rents[index].rentState}',
                             price:
                                 _rents[index].pricePerPerson.toInt().toString(),
                             flatUrl: '${_rents[index].photo}',

@@ -4,7 +4,7 @@ import 'package:living_app/models/enums/gender.dart';
 class User {
   final String id;
   final String firstName;
-  final String surName;
+  final String lastName;
   final String email;
   final String? birthDate;
   final String? photo;
@@ -13,7 +13,7 @@ class User {
   User(
     this.id,
     this.firstName,
-    this.surName,
+    this.lastName,
     this.email,
     this.birthDate,
     this.photo,

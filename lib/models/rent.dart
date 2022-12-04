@@ -1,5 +1,5 @@
 class Rent {
-  final String? id;
+  final String id;
   final String? name;
   final String? city;
   final String? country;
@@ -16,6 +16,7 @@ class Rent {
   final int numberOfRooms;
   final int numberOfOccupants;
   final String? photo;
+  final String? description;
 
   Rent(
     this.id,
@@ -35,6 +36,7 @@ class Rent {
     this.numberOfRooms,
     this.numberOfOccupants,
     this.photo,
+    this.description,
   );
 
   factory Rent.fromJson(Map<String, dynamic> json) {
@@ -56,6 +58,7 @@ class Rent {
       json['numberOfRooms'],
       json['numberOfOccupants'],
       json['photo'],
+      json['description'],
     );
   }
 }

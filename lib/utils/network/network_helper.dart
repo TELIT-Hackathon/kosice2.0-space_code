@@ -127,8 +127,8 @@ class ApiBaseHelper {
         throw BadRequestException();
       case 401:
         throw UnauthorizedException();
-      case 404:
-        throw EntityNotFoundException();
+      // case 404:
+      //   throw EntityNotFoundException();
       case 500:
       default:
         throw GenericErrorException();

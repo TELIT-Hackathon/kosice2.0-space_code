@@ -6,12 +6,14 @@ import 'package:living_app/widgets/texts/var_text.dart';
 class CustomCard extends StatelessWidget {
   final String name;
   final String address;
+  final String state;
   final String price;
   final String flatUrl;
 
   const CustomCard(
       {required this.name,
       required this.address,
+      required this.state,
       required this.price,
       required this.flatUrl,
       Key? key})
@@ -96,16 +98,35 @@ class CustomCard extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                    top: 4,
-                                    bottom: 4,
                                     left: 4,
                                   ),
                                   child: VarText(
                                     textAlign: TextAlign.left,
-                                    text: address,
+                                    text: state,
                                     color: AppColors.secondary,
-                                    size: 12,
+                                    size: 14,
                                   ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 4,
+                                        bottom: 4,
+                                        left: 4,
+                                      ),
+                                      child: VarText(
+                                        textAlign: TextAlign.left,
+                                        text: address,
+                                        color: AppColors.secondary,
+                                        size: 12,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

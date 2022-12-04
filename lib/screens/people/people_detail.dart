@@ -379,6 +379,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                           CustomCard(
                             name: 'Kfdshkjfhdskjf',
                             price: '420.00',
+                            state: '',
                             flatUrl:
                                 'https://psgroup.in/blog/wp-content/uploads/2021/03/pexels-curtis-adams-5178052-1024x683.jpg',
                             address: 'Hronska 205/11',
