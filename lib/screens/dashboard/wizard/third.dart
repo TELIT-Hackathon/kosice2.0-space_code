@@ -15,15 +15,12 @@ class ThirdWizard extends StatefulWidget {
 }
 
 class _ThirdWizardState extends State<ThirdWizard> {
-  late TextEditingController _textEditingController;
-  double value = 0;
   double _value = 0;
-  int newvalue = 0;
+  int newValue = 0;
 
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController();
   }
 
   @override
@@ -33,13 +30,13 @@ class _ThirdWizardState extends State<ThirdWizard> {
         children: [
           const ActionBar(),
           const Header(text: '3. Cena'),
-          const SubHeader(text: 'Vyber si za koľko chceš bývať'),
+          const SubHeader(text: 'Za koľko by si chcel bývať ?'),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: RichTextCustom(
                 alignment: Alignment.center,
                 firstText: 'do ',
-                secondText: '$newvalue €'),
+                secondText: '$newValue €'),
           ),
           Slider.adaptive(
             activeColor: AppColors.primary,
@@ -50,7 +47,7 @@ class _ThirdWizardState extends State<ThirdWizard> {
             onChanged: (value) {
               setState(() {
                 _value = value;
-                newvalue = _value.toInt();
+                newValue = _value.toInt();
               });
             },
           ),
