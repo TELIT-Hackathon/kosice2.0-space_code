@@ -14,6 +14,13 @@ class WebService {
     );
   }
 
+  Future<RentPreferences> getPreferences(String userId) async {
+    final response = await _helper.get(
+      "customer/$userId/preferences",
+    );
+    return RentPreferences.fromJson(response['content']);
+  }
+
   Future<List<Rent>> getRents() async {
     final response = await _helper.get(
       "rent/all",

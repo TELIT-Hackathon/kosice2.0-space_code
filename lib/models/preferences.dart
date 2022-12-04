@@ -66,7 +66,7 @@ class Transportation {
 
 class RentPreferences {
   final RoommatePreferences? roommatePreferences;
-  final List<String>? cityParts;
+  final List<dynamic>? cityParts;
   final int? maxPrice;
   final Education? education;
   final Transportation? transportation;
