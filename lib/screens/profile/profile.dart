@@ -24,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
   late List<Widget> _optionsList;
   late WebService _webService;
-  String loggedUser = 'c459e3a9-3152-4953-a972-e4130a8323df';
+  String loggedUser = '594694fd-0e1c-4ece-802f-ea4614681172';
   User? _userData;
   bool _isError = false;
 

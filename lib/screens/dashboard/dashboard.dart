@@ -101,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
                       physics: const BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics(),
                       ),
-                      itemCount: _rents.length + 1,
+                      itemCount: _rents.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           behavior: HitTestBehavior.translucent,

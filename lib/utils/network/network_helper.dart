@@ -11,6 +11,32 @@ class ApiBaseHelper {
   static const _backendBaseUrlRaw = '192.168.233.82:8080';
   static const _backendBaseUrl = 'http://$_backendBaseUrlRaw/';
 
+  Future<dynamic> postMaros(String path, dynamic body,
+      {bool doAuth = true}) async {
+    var responseJson;
+    var uri = Uri.http('192.168.233.236:3004', path);
+    try {
+      print("TU SOOON");
+      final response = await http.post(
+        uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Host': '192.168.233.236:3004',
+        },
+        body: jsonEncode(body),
+      );
+      responseJson = await _returnResponse(path, response);
+      print("CAKAM");
+      print(responseJson);
+    } on Exception {
+      throw FetchDataException();
+    } catch (e) {
+      print("ERROR");
+      print(e);
+    }
+    return responseJson;
+  }
+
   Future<dynamic> get(String path, {Map<String, String>? queryParams}) async {
     var responseJson;
     var uri = Uri.http(_backendBaseUrlRaw, path, queryParams);

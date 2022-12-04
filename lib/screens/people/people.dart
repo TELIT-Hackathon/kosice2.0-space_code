@@ -1,10 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:living_app/main.dart';
-import 'package:living_app/models/enums/building.dart';
 import 'package:living_app/models/people.dart';
+import 'package:living_app/models/preferences.dart';
 import 'package:living_app/screens/people/people_detail.dart';
 import 'package:living_app/utils/colors.dart';
+import 'package:living_app/utils/network/request_helper.dart';
 import 'package:living_app/utils/network/services/web_service.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/layouts/tabbed_header.dart';
@@ -49,25 +50,50 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
     with AutomaticKeepAliveClientMixin<RecommendationsScreen>, RouteAware {
   List<People> _peoples = [
     People(
-        'fd',
-        'KOSICE, KVP',
-        [
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url')
-        ],
-        BuildingType.FLAT,
-        420.00),
+      [
+        LocationUser('', 'David', 'Hresko', 'url'),
+        LocationUser('', 'Stefan', 'Kacka', 'url'),
+        LocationUser('', 'Janko', 'Ferko', 'url')
+      ],
+      RentPreferences(
+        RoommatePreferences('DOMESTIC', '0', '80', 'MALE'),
+        ['Košice-KVP'],
+        200,
+        Education(false, false, false),
+        Transportation(false, true, false),
+        FreeTime(true, true, true),
+      ),
+    ),
     People(
-        'fd',
-        'KOSICE, Tahanovce',
-        [
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Kokot', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url')
-        ],
-        BuildingType.FLAT,
-        420.00)
+      [
+        LocationUser('', 'David', 'Hresko', 'url'),
+        LocationUser('', 'Stefan', 'Michlik', 'url'),
+        LocationUser('', 'Maros', 'Hliboky', 'url'),
+        LocationUser('', 'Viliam', 'Korba', 'url'),
+      ],
+      RentPreferences(
+        RoommatePreferences('DOMESTIC', '0', '80', 'MALE'),
+        ['Košice-Západ'],
+        200,
+        Education(false, false, false),
+        Transportation(false, true, false),
+        FreeTime(true, true, true),
+      ),
+    ),
+    People(
+      [
+        LocationUser('', 'David', 'Hresko', 'url'),
+        LocationUser('', 'Viliam', 'Korba', 'url')
+      ],
+      RentPreferences(
+        RoommatePreferences('DOMESTIC', '0', '80', 'MALE'),
+        ['Košice-KVP', ' Košice-Západ'],
+        420,
+        Education(false, false, false),
+        Transportation(false, true, false),
+        FreeTime(true, true, true),
+      ),
+    ),
   ];
   late WebService _webService;
 
@@ -75,8 +101,6 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
   void initState() {
     super.initState();
     _webService = WebService();
-
-    // TODO natiahnut z API
   }
 
   @override
@@ -111,8 +135,7 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
                           Navigator.pushNamed(
                             context,
                             '/peopleDetail',
-                            arguments:
-                                PeopleDetailArgs(_peoples[index].id, true),
+                            arguments: PeopleDetailArgs(true),
                           ),
                         },
                         child: Padding(
@@ -142,7 +165,10 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
                                               ),
                                               child: VarText(
                                                 textAlign: TextAlign.center,
-                                                text: _peoples[index].location,
+                                                text: _peoples[index]
+                                                    .rentPreferences
+                                                    .cityParts!
+                                                    .join(","),
                                                 color: AppColors.black,
                                                 size: 21,
                                               ),
@@ -167,15 +193,14 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
                                                           AppColors.secondary,
                                                       size: 18,
                                                     ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .fromLTRB(4, 0, 8, 0),
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              4, 0, 8, 0),
                                                       child: VarText(
                                                         color:
                                                             AppColors.secondary,
-                                                        text: _peoples[index]
-                                                            .type
-                                                            .toString(),
+                                                        text: 'Byt, Dom',
                                                       ),
                                                     ),
                                                     const Icon(
@@ -192,7 +217,7 @@ class _RecommendationsScreenState extends State<RecommendationsScreen>
                                                         color:
                                                             AppColors.secondary,
                                                         text:
-                                                            'do ${_peoples[index].price.toStringAsFixed(2)} €',
+                                                            'do ${_peoples[index].rentPreferences.maxPrice!.toStringAsFixed(2)} €',
                                                       ),
                                                     ),
                                                   ],
@@ -324,36 +349,33 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen>
     with AutomaticKeepAliveClientMixin<SavedScreen>, RouteAware {
-  List<People> _peoples = [
-    People(
-        'fd',
-        'KOSICE, KVP',
-        [
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url')
-        ],
-        BuildingType.FLAT,
-        420.00),
-    People(
-        'fd',
-        'KOSICE, Tahanovce',
-        [
-          LocationUser('', 'David', 'Hresko', 'url'),
-          LocationUser('', 'David', 'Kokot', 'url'),
-          LocationUser('', 'David', 'Hresko', 'url')
-        ],
-        BuildingType.FLAT,
-        420.00)
-  ];
+  People? _people;
   late WebService _webService;
+  String loggedUser = '594694fd-0e1c-4ece-802f-ea4614681172';
+
+  void _updateScreen(bool isInit) {
+    if (isInit) onLoading(context);
+    _webService.getPeople(loggedUser).then(
+      (res) {
+        if (isInit) Navigator.pop(context);
+        setState(
+          () {
+            _people = res;
+          },
+        );
+      },
+    ).onError(
+      (error, stackTrace) {
+        onError(context, error.toString(), isInit);
+      },
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     _webService = WebService();
-
-    // TODO natiahnut z API
+    _updateScreen(true);
   }
 
   @override
@@ -366,20 +388,22 @@ class _SavedScreenState extends State<SavedScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return _peoples.isNotEmpty
+    return _people != null
         ? Column(
             children: [
               Expanded(
                 child: RefreshIndicator(
                   color: AppColors.primary,
                   backgroundColor: AppColors.white,
-                  onRefresh: () async {},
+                  onRefresh: () async {
+                    _updateScreen(false);
+                  },
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics(),
                     ),
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    itemCount: _peoples.length,
+                    itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         behavior: HitTestBehavior.translucent,
@@ -389,7 +413,6 @@ class _SavedScreenState extends State<SavedScreen>
                             context,
                             '/peopleDetail',
                             arguments: PeopleDetailArgs(
-                              _peoples[index].id,
                               false,
                             ),
                           ),
@@ -421,13 +444,15 @@ class _SavedScreenState extends State<SavedScreen>
                                               ),
                                               child: VarText(
                                                 textAlign: TextAlign.center,
-                                                text: _peoples[index].location,
+                                                text: _people!
+                                                    .rentPreferences.cityParts!
+                                                    .join(", "),
                                                 color: AppColors.black,
                                                 size: 21,
                                               ),
                                             ),
                                             UserPhotos(
-                                              users: _peoples[index].users,
+                                              users: _people!.users,
                                             ),
                                             Container(
                                               color: AppColors.defaultColor
@@ -446,15 +471,14 @@ class _SavedScreenState extends State<SavedScreen>
                                                           AppColors.secondary,
                                                       size: 18,
                                                     ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .fromLTRB(4, 0, 8, 0),
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              4, 0, 8, 0),
                                                       child: VarText(
                                                         color:
                                                             AppColors.secondary,
-                                                        text: _peoples[index]
-                                                            .type
-                                                            .toString(),
+                                                        text: 'Byt, Dom',
                                                       ),
                                                     ),
                                                     const Icon(
@@ -471,70 +495,12 @@ class _SavedScreenState extends State<SavedScreen>
                                                         color:
                                                             AppColors.secondary,
                                                         text:
-                                                            'do ${_peoples[index].price.toStringAsFixed(2)} €',
+                                                            'do ${_people!.rentPreferences.maxPrice!.toInt()} € /mesiac',
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                               ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      color: AppColors
-                                                          .defaultColor,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(20),
-                                                        bottomRight:
-                                                            Radius.circular(20),
-                                                      ),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        GestureDetector(
-                                                          onTap: () {},
-                                                          child: const Icon(
-                                                            Icons.check_rounded,
-                                                            size: 48,
-                                                            color: AppColors
-                                                                .primary,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 40,
-                                                          child:
-                                                              VerticalDivider(
-                                                            color: AppColors
-                                                                .secondary
-                                                                .withOpacity(
-                                                                    0.2),
-                                                            thickness: 1,
-                                                          ),
-                                                        ),
-                                                        GestureDetector(
-                                                          onTap: () {},
-                                                          child: const Icon(
-                                                            Icons.close_rounded,
-                                                            size: 48,
-                                                            color:
-                                                                AppColors.red,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
                                             ),
                                           ],
                                         ),
@@ -557,9 +523,7 @@ class _SavedScreenState extends State<SavedScreen>
             backgroundColor: AppColors.white,
             color: AppColors.primary,
             onRefresh: () async {
-              setState(() {
-                // TODO urobit API call
-              });
+              _updateScreen(false);
             },
             child: const CustomScrollView(
               physics: BouncingScrollPhysics(
@@ -581,7 +545,7 @@ class _SavedScreenState extends State<SavedScreen>
 
   @override
   void didPopNext() {
-    // TODO urobit call na API
+    _updateScreen(false);
   }
 
   @override
@@ -619,7 +583,7 @@ class UserPhotos extends StatelessWidget {
                         CachedImage(
                           imageUrl: u.photo,
                           defaultContent:
-                              '${u.firstName[0].toUpperCase()}${u.surName[0].toUpperCase()}',
+                              '${u.firstName[0].toUpperCase()}${u.lastName[0].toUpperCase()}',
                         ),
                       ],
                     ),

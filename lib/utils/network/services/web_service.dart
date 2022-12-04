@@ -1,3 +1,4 @@
+import 'package:living_app/models/people.dart';
 import 'package:living_app/models/preferences.dart';
 import 'package:living_app/models/rent.dart';
 import 'package:living_app/models/user.dart';
@@ -26,6 +27,25 @@ class WebService {
       "rent/all",
     );
     var rents = response['content'] as List;
+
+    return rents.map((e) => Rent.fromJson(e)).toList();
+  }
+
+  Future<People> getPeople(String userId) async {
+    final response = await _helper.get(
+      "customer/$userId/group",
+    );
+    return People.fromJson(response['content']);
+  }
+
+  Future<List<Rent>> getRentMaros(RentPreferences preferences) async {
+    final response = await _helper.postMaros(
+      "api/rentanal",
+      preferences,
+    );
+    var rents = response['content'] as List;
+    print('RESPONSEEEE');
+    print(rents);
 
     return rents.map((e) => Rent.fromJson(e)).toList();
   }

@@ -1,8 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/button.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/texts/rich_text.dart';
@@ -83,7 +82,6 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                         padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                         child: VarText(text: 'Preferencie', size: 21),
                       ),
-                      
                       RichTextCustom(
                         firstText: 'Cena do ',
                         secondText: '150 €',
@@ -138,7 +136,8 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                  padding: const EdgeInsets.only(
+                                      top: 16.0, left: 16),
                                   child: Row(
                                     children: const [
                                       Icon(
@@ -210,7 +209,8 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                        padding: const EdgeInsets.only(
+                                            top: 16.0, left: 16),
                                         child: Row(
                                           children: const [
                                             Icon(
@@ -218,7 +218,8 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                                               color: AppColors.secondary,
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 4.0),
+                                              padding:
+                                                  EdgeInsets.only(left: 4.0),
                                               child: VarText(
                                                 color: AppColors.secondary,
                                                 text: 'Vzdelanie',
@@ -279,7 +280,6 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           ),
                         ],
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0, left: 16),
                         child: Row(
@@ -299,7 +299,6 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           ],
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 4),
                         child: Row(
@@ -320,8 +319,6 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           ],
                         ),
                       ),
-
-
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0, left: 16),
                         child: Row(
@@ -341,8 +338,6 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           ],
                         ),
                       ),
-
-
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 4),
                         child: Row(

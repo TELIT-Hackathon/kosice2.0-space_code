@@ -77,6 +77,7 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
         '/finalWizard': (context) => const FinalWizard(),
         '/people': (context) => const PeopleScreen(),
         '/peopleDetail': (context) => const PeopleDetailScreen(),
+        '/profileAnother': (context) => const ProfileAnother(),
         '/profile': (context) => const ProfileScreen(),
         '/profilePreferences': (context) => const ProfilePreferences(),
         '/profileSettings': (context) => const ProfileSettings(),

@@ -11,7 +11,6 @@ import 'package:living_app/widgets/minors/error_layout.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 
-
 class AccommodationDetailArgs {
   final String flatId;
 
@@ -32,11 +31,11 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
   late AccommodationDetailArgs _args;
   Rent? _rent;
   bool _isError = false;
+
   // late int culture = (cult/5*100).round();
   // late int school = (scho/5*100).round();
   // late int buses = (bus/5*100).round();
   // late int hospital = (hosp/5*100).round();
-
 
   void _updateScreen(bool isInit) {
     if (isInit) onLoading(context);
@@ -137,36 +136,40 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                             child: Column(
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                                          child:
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.person_outline,
-                                                    color: AppColors.secondary,
-                                                    size: 18,
-                                                  ),
-                                                   Padding(
-                                                     padding: const EdgeInsets.only(left: 8.0, bottom: 8),
-                                                     child: const VarText(
-                                                        text: 'Majiteľ: Štefan Michlík',
-                                                        color: AppColors.secondary,
-                                                      ),
-                                                   ),
-                                                ],
+                                          padding: const EdgeInsets.fromLTRB(
+                                              16, 8, 16, 0),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.person_outline,
+                                                color: AppColors.secondary,
+                                                size: 18,
                                               ),
-                                             ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, bottom: 8),
+                                                child: const VarText(
+                                                  text:
+                                                      'Majiteľ: Štefan Michlík',
+                                                  color: AppColors.secondary,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
-                                          padding:
-                                          const EdgeInsets.only(left: 16.0,),
+                                          padding: const EdgeInsets.only(
+                                            left: 16.0,
+                                          ),
                                           child: Row(
                                             children: [
                                               const Icon(
@@ -175,10 +178,11 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                                 size: 18,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 8.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0),
                                                 child: VarText(
                                                   text:
-                                                  '${_rent!.street} ${_rent!.houseNumber},',
+                                                      '${_rent!.street} ${_rent!.houseNumber},',
                                                   color: AppColors.secondary,
                                                 ),
                                               ),
@@ -188,10 +192,10 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                         Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 16, top: 8),
+                                              padding: const EdgeInsets.only(
+                                                  left: 40, top: 8),
                                               child: VarText(
-                                                text:
-                                                ' ${_rent!.city}',
+                                                text: ' ${_rent!.city}',
                                                 color: AppColors.secondary,
                                               ),
                                             ),
@@ -199,22 +203,21 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                         ),
                                       ],
                                     ),
-
-                                 Padding(
-                                   padding: const EdgeInsets.only(top: 8.0),
-                                   child: ActionButton(
-                                onPressed: () {
-                                Navigator.pushNamed(
-                                    context,
-                                    '/profileAnother',);
-                              },
-                              color: AppColors.primary,
-                              text: 'Kontaktovať',
-                            ),
-                                 ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: ActionButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/profileAnother',
+                                          );
+                                        },
+                                        color: AppColors.primary,
+                                        text: 'Kontaktovať',
+                                      ),
+                                    ),
                                   ],
                                 ),
-
                                 const Padding(
                                   padding: EdgeInsets.only(top: 4),
                                   child: Divider(
@@ -223,13 +226,13 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                     color: AppColors.secondary,
                                   ),
                                 ),
-
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 16.0, top: 4),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
                                       Row(
                                         children: [
                                           const Icon(
@@ -238,23 +241,23 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
                                             child: VarText(
-                                              text:
-                                                  'Počet izieb: ',
+                                              text: 'Počet izieb: ',
                                               color: AppColors.secondary,
                                             ),
                                           ),
                                         ],
                                       ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 8.0, right: 16),
-                                          child: VarText(
-                                            text:
-                                            ' ${_rent!.numberOfRooms}',
-                                            color: AppColors.secondary,
-                                          ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 16),
+                                        child: VarText(
+                                          text: ' ${_rent!.numberOfRooms}',
+                                          color: AppColors.secondary,
                                         ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -262,7 +265,8 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                   padding:
                                       const EdgeInsets.only(left: 16.0, top: 4),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -272,20 +276,21 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
                                             child: VarText(
-                                              text:
-                                                  'Rozloha: ',
+                                              text: 'Rozloha: ',
                                               color: AppColors.secondary,
                                             ),
                                           ),
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 8.0, right: 16),
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 16),
                                         child: VarText(
                                           text:
-                                          '${_rent!.squaredMeters} m2',
+                                              '${_rent!.squaredMeters.toStringAsFixed(2)} m2',
                                           color: AppColors.secondary,
                                         ),
                                       ),
@@ -304,7 +309,8 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                   padding:
                                       const EdgeInsets.only(left: 16.0, top: 4),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -314,7 +320,8 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
                                             child: VarText(
                                                 text:
                                                     'Počet spolubývajúcich: '),
@@ -322,10 +329,11 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 8.0, right: 16),
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 16),
                                         child: VarText(
                                             text:
-                                            '${_rent!.numberOfOccupants}'),
+                                                '${_rent!.numberOfOccupants}'),
                                       ),
                                     ],
                                   ),
@@ -334,7 +342,8 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                   padding:
                                       const EdgeInsets.only(left: 16.0, top: 4),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -344,18 +353,19 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
                                             child: VarText(
-                                                text:
-                                                    'Cena na osobu: '),
+                                                text: 'Cena na osobu: '),
                                           ),
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 8.0, right: 16),
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 16),
                                         child: VarText(
                                             text:
-                                            '${_rent!.pricePerPerson.toInt()} € / mesiac'),
+                                                '${_rent!.pricePerPerson.toInt()} € / mesiac'),
                                       ),
                                     ],
                                   ),
@@ -368,68 +378,74 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                     color: AppColors.secondary,
                                   ),
                                 ),
-
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16.0, bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 16.0, bottom: 8),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.movie_creation_outlined,
                                             color: AppColors.secondary,
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: EdgeInsets.only(left: 8.0),
                                             child: VarText(
-                                                text:
-                                                'Index kultúrneho vyžitia: '),
+                                                text: 'Kultúrne vyžitie: '),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 16.0),
-                                      child: VarText(text: '80 %'),
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: VarText(
+                                          text:
+                                              '${(_rent!.culture * 19).toInt()} %'),
                                     ),
                                   ],
                                 ),
-
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16.0, bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 16.0, bottom: 8),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.menu_book_outlined,
                                             color: AppColors.secondary,
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
-                                            child: VarText(
-                                                text:
-                                                'Dostupnosť vzdelania: '),
+                                            padding: EdgeInsets.only(left: 8.0),
+                                            child: VarText(text: 'Vzdelanie: '),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 16.0),
-                                      child: VarText(text: '75 %'),
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: VarText(
+                                          text:
+                                              '${(_rent!.culture * 19).toInt()} %'),
                                     ),
                                   ],
                                 ),
-
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16.0, bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 16.0, bottom: 8),
                                       child: Row(
                                         children: [
                                           const Icon(
@@ -438,50 +454,55 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
-                                            child: VarText(
-                                                text:
-                                                'Dostupnosť nízkoemisnej dopravy: '),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child:
+                                                VarText(text: 'Eco doprava: '),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 16.0),
-                                      child: VarText(text: '65 %'),
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: VarText(
+                                          text:
+                                              '${(_rent!.green * 19).toInt()} %'),
                                     ),
                                   ],
                                 ),
-
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16.0, bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 16.0, bottom: 8),
                                       child: Row(
-                                        children: [
-                                          const Icon(
+                                        children: const [
+                                          Icon(
                                             Icons.local_hospital_outlined,
                                             color: AppColors.secondary,
                                             size: 18,
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: EdgeInsets.only(left: 8.0),
                                             child: VarText(
                                                 text:
-                                                'Dostupnosť zdravotnej starostlivosti: '),
+                                                    'Zdravotná starostlivosť: '),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 16.0),
-                                      child: VarText(text: '65 %'),
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: VarText(
+                                          text:
+                                              '${(_rent!.health * 19).toInt()} %'),
                                     ),
                                   ],
                                 ),
-
-
                                 Theme(
                                   data: theme,
                                   child: ExpansionTile(
@@ -510,13 +531,12 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                   padding: const EdgeInsets.all(16),
                                   height: 400,
                                   width: MediaQuery.of(context).size.width,
-
-                                  child:
-                                  FlutterLocationPicker(
-                                    showSelectLocationButton: false,
+                                  child: FlutterLocationPicker(
+                                      showSelectLocationButton: false,
                                       showLocationController: false,
                                       showZoomController: false,
-                                      initPosition: LatLong(_rent!.longitude, _rent!.latitude),
+                                      initPosition: LatLong(
+                                          _rent!.longitude, _rent!.latitude),
                                       initZoom: 16,
                                       minZoomLevel: 5,
                                       maxZoomLevel: 16,
@@ -528,24 +548,18 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                         print(pickedData.latLong.latitude);
                                         print(pickedData.latLong.longitude);
                                         print(pickedData.address);
-                                        print(pickedData.addressData['country']);
+                                        print(
+                                            pickedData.addressData['country']);
                                       }),
                                 ),
-                                
-
-
-
                               ],
                             ),
                           ),
                         ),
                       ),
-
                     ],
-
                   ),
                 ),
-
               )
             : Container();
   }

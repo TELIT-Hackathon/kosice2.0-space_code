@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:living_app/models/enums/building.dart';
 import 'package:living_app/models/people.dart';
+import 'package:living_app/models/rent.dart';
+import 'package:living_app/screens/dashboard/accommodation_detail.dart';
 import 'package:living_app/screens/people/people.dart';
 import 'package:living_app/utils/colors.dart';
+import 'package:living_app/utils/network/request_helper.dart';
 import 'package:living_app/utils/network/services/web_service.dart';
 import 'package:living_app/widgets/buttons/icon_button_custom.dart';
 import 'package:living_app/widgets/layouts/collapsible_action_bar.dart';
@@ -13,11 +15,9 @@ import 'package:living_app/widgets/minors/custom_home_card.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 
 class PeopleDetailArgs {
-  final String peopleId;
   final bool isRecommended;
 
   PeopleDetailArgs(
-    this.peopleId,
     this.isRecommended,
   );
 }
@@ -33,17 +33,68 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   late WebService _webService;
   late PeopleDetailArgs _args;
   bool _isError = false;
+  String loggedUser = '594694fd-0e1c-4ece-802f-ea4614681172';
+  List<String> _freeTime = [];
+  List<String> _transport = [];
+  List<String> _education = [];
 
-  People _people = People(
-      'fd',
-      'KOSICE, KVP',
-      [
-        LocationUser('', 'David', 'Hresko', 'url'),
-        LocationUser('', 'David', 'Hresko', 'url'),
-        LocationUser('', 'David', 'Hresko', 'url')
-      ],
-      BuildingType.FLAT,
-      420.00);
+  People? _people;
+  List<Rent> _rents = [];
+
+  void _updateScreen(bool isInit) {
+    if (isInit) onLoading(context);
+    _webService.getPeople(loggedUser).then(
+      (res) {
+        if (isInit) Navigator.pop(context);
+        setState(
+          () {
+            _people = res;
+            _getMarosData();
+            if (_people!.rentPreferences.education!.kindergarten)
+              _education.add('Materská škola');
+            if (_people!.rentPreferences.education!.primarySchool)
+              _education.add('Základná škola');
+            if (_people!.rentPreferences.education!.highSchool)
+              _education.add('Stredná škola');
+
+            if (_people!.rentPreferences.transportation!.publicTransport)
+              _transport.add('MHD');
+            if (_people!.rentPreferences.transportation!.nonMotor)
+              _transport.add('Nemotor.');
+            if (_people!.rentPreferences.transportation!.motor)
+              _transport.add('Motor.');
+
+            if (_people!.rentPreferences.freeTime!.cinema)
+              _freeTime.add('Kino');
+            if (_people!.rentPreferences.freeTime!.theater)
+              _freeTime.add('Divadlo');
+            if (_people!.rentPreferences.freeTime!.sport)
+              _freeTime.add('Šport');
+          },
+        );
+      },
+    ).onError(
+      (error, stackTrace) {
+        onError(context, error.toString(), isInit);
+      },
+    );
+  }
+
+  void _getMarosData() {
+    _webService.getRentMaros(_people!.rentPreferences).then(
+      (res) {
+        setState(
+          () {
+            _rents = res;
+          },
+        );
+      },
+    ).onError(
+      (error, stackTrace) {
+        onError(context, error.toString(), false);
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -53,10 +104,11 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         _args = ModalRoute.of(context)!.settings.arguments as PeopleDetailArgs;
+        _updateScreen(true);
       },
     );
 
-    // TODO natiahnut z API
+    // TODO natiahnut z API rents
   }
 
   @override
@@ -65,333 +117,374 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
 
     return _isError
         ? ErrorScreen(
-            onPressed: () {},
+            onPressed: () {
+              _updateScreen(true);
+            },
           )
-        : Parent(
-            child: CollapsibleActionBar(
-              title: 'Kosice, KVP',
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  child: IconButtonCustom(
-                    color: AppColors.secondary,
-                    icon: const Icon(Icons.message_rounded),
-                    onPressed: () {},
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: IconButtonCustom(
-                    color: AppColors.secondary,
-                    icon: const Icon(Icons.settings_rounded),
-                    onPressed: () {},
-                  ),
-                )
-              ],
-              body: RefreshIndicator(
-                backgroundColor: AppColors.white,
-                color: AppColors.primary,
-                onRefresh: () async {},
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          UserPhotos(
-                            users: _people.users,
-                          ),
-                          _args.isRecommended
-                              ? const ActionContainer()
-                              : Container(),
-                          Theme(
-                            data: theme,
-                            child: ExpansionTile(
-                              initiallyExpanded: true,
-                              collapsedIconColor: AppColors.secondary,
-                              iconColor: AppColors.secondary,
-                              title: const VarText(
-                                textAlign: TextAlign.start,
-                                text: 'Základné preferencie',
-                                size: 18,
+        : _people != null
+            ? Parent(
+                child: CollapsibleActionBar(
+                  title: _people!.rentPreferences.cityParts!.join(", "),
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                      child: IconButtonCustom(
+                        color: AppColors.secondary,
+                        icon: const Icon(Icons.message_rounded),
+                        onPressed: () {},
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: IconButtonCustom(
+                        color: AppColors.secondary,
+                        icon: const Icon(Icons.settings_rounded),
+                        onPressed: () {},
+                      ),
+                    )
+                  ],
+                  body: RefreshIndicator(
+                    backgroundColor: AppColors.white,
+                    color: AppColors.primary,
+                    onRefresh: () async {},
+                    child: CustomScrollView(
+                      physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              UserPhotos(
+                                users: _people!.users,
                               ),
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: const [
-                                                      Icon(
-                                                        Icons.house_outlined,
+                              _args.isRecommended
+                                  ? const ActionContainer()
+                                  : Container(),
+                              Theme(
+                                data: theme,
+                                child: ExpansionTile(
+                                  initiallyExpanded: true,
+                                  collapsedIconColor: AppColors.secondary,
+                                  iconColor: AppColors.secondary,
+                                  title: const VarText(
+                                    textAlign: TextAlign.start,
+                                    text: 'Základné preferencie',
+                                    size: 18,
+                                  ),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: const [
+                                                          Icon(
+                                                            Icons
+                                                                .house_outlined,
+                                                            color: AppColors
+                                                                .secondary,
+                                                            size: 18,
+                                                          ),
+                                                          VarText(
+                                                            color: AppColors
+                                                                .secondary,
+                                                            text:
+                                                                'Typ ubytovania: ',
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const VarText(
                                                         color:
                                                             AppColors.secondary,
-                                                        size: 18,
+                                                        text: 'Byt, Dom',
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: const [
+                                                        Icon(
+                                                          Icons.bed_outlined,
+                                                          color: AppColors
+                                                              .secondary,
+                                                          size: 18,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 4.0),
+                                                          child: VarText(
+                                                            color: AppColors
+                                                                .secondary,
+                                                            text:
+                                                                'Počet izieb:',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    VarText(
+                                                      color:
+                                                          AppColors.secondary,
+                                                      text:
+                                                          '${_people!.users.length - 1}',
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: const [
+                                                          Icon(
+                                                            Icons
+                                                                .attach_money_rounded,
+                                                            color: AppColors
+                                                                .secondary,
+                                                            size: 18,
+                                                          ),
+                                                          VarText(
+                                                            color: AppColors
+                                                                .secondary,
+                                                            text:
+                                                                'Cena na osobu: ',
+                                                          ),
+                                                        ],
                                                       ),
                                                       VarText(
                                                         color:
                                                             AppColors.secondary,
                                                         text:
-                                                            'Typ ubytovania: ',
+                                                            'do ${_people!.rentPreferences.maxPrice!.toInt()} € /mesiac',
                                                       ),
                                                     ],
                                                   ),
-                                                  const VarText(
-                                                    color: AppColors.secondary,
-                                                    text: 'Byt/Dom',
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  children: const [
-                                                    Icon(
-                                                      Icons.bed_outlined,
-                                                      color:
-                                                          AppColors.secondary,
-                                                      size: 18,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 4.0),
-                                                      child: VarText(
-                                                        color:
-                                                            AppColors.secondary,
-                                                        text: 'Počet izieb:',
-                                                      ),
-                                                    ),
-                                                  ],
                                                 ),
-                                                const VarText(
-                                                  color: AppColors.secondary,
-                                                  text: '3',
-                                                ),
+                                                const CustomDivider(),
                                               ],
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: const [
-                                                      Icon(
-                                                        Icons
-                                                            .attach_money_rounded,
-                                                        color:
-                                                            AppColors.secondary,
-                                                        size: 18,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Theme(
+                                data: theme,
+                                child: ExpansionTile(
+                                  initiallyExpanded: true,
+                                  collapsedIconColor: AppColors.secondary,
+                                  iconColor: AppColors.secondary,
+                                  title: const VarText(
+                                    textAlign: TextAlign.start,
+                                    text: 'Občianské vybavenie',
+                                    size: 18,
+                                  ),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: const [
+                                                          Icon(
+                                                            Icons
+                                                                .house_outlined,
+                                                            color: AppColors
+                                                                .secondary,
+                                                            size: 18,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 4.0),
+                                                            child: VarText(
+                                                              color: AppColors
+                                                                  .secondary,
+                                                              text: 'Vzdelanie',
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       VarText(
                                                         color:
                                                             AppColors.secondary,
-                                                        text: 'Cena na osobu: ',
+                                                        text: _education
+                                                            .join(", "),
                                                       ),
                                                     ],
                                                   ),
-                                                  VarText(
-                                                    color: AppColors.secondary,
-                                                    text:
-                                                        'do ${_people.price.toStringAsFixed(2)} €',
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const CustomDivider(),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Theme(
-                            data: theme,
-                            child: ExpansionTile(
-                              initiallyExpanded: true,
-                              collapsedIconColor: AppColors.secondary,
-                              iconColor: AppColors.secondary,
-                              title: const VarText(
-                                textAlign: TextAlign.start,
-                                text: 'Občianské vybavenie',
-                                size: 18,
-                              ),
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: const [
-                                                      Icon(
-                                                        Icons.house_outlined,
-                                                        color:
-                                                            AppColors.secondary,
-                                                        size: 18,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 4.0),
-                                                        child: VarText(
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: const [
+                                                        Icon(
+                                                          Icons
+                                                              .local_hospital_outlined,
                                                           color: AppColors
                                                               .secondary,
-                                                          text: 'Vzdelanie',
+                                                          size: 18,
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const VarText(
-                                                    color: AppColors.secondary,
-                                                    text: 'Základná škola',
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  children: const [
-                                                    Icon(
-                                                      Icons
-                                                          .local_hospital_outlined,
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 4.0),
+                                                          child: VarText(
+                                                            color: AppColors
+                                                                .secondary,
+                                                            text: 'Doprava',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    VarText(
                                                       color:
                                                           AppColors.secondary,
-                                                      size: 18,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 4.0),
-                                                      child: VarText(
-                                                        color:
-                                                            AppColors.secondary,
-                                                        text: 'Nemocnica',
-                                                      ),
+                                                      text:
+                                                          _transport.join(", "),
                                                     ),
                                                   ],
                                                 ),
-                                                const VarText(
-                                                  color: AppColors.secondary,
-                                                  text: 'Nezáleží',
-                                                ),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: const [
-                                                      Icon(
-                                                        Icons
-                                                            .theater_comedy_outlined,
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: const [
+                                                          Icon(
+                                                            Icons
+                                                                .theater_comedy_outlined,
+                                                            color: AppColors
+                                                                .secondary,
+                                                            size: 18,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 4.0),
+                                                            child: VarText(
+                                                              color: AppColors
+                                                                  .secondary,
+                                                              text: 'Voľný čas',
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      VarText(
                                                         color:
                                                             AppColors.secondary,
-                                                        size: 18,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 4.0),
-                                                        child: VarText(
-                                                          color: AppColors
-                                                              .secondary,
-                                                          text: 'Kultúra',
-                                                        ),
+                                                        text: _freeTime
+                                                            .join(", "),
                                                       ),
                                                     ],
                                                   ),
-                                                  const VarText(
-                                                    color: AppColors.secondary,
-                                                    text: 'Áno',
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                                const CustomDivider(),
+                                              ],
                                             ),
-                                            const CustomDivider(),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 16),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: const VarText(
+                                        text: 'Navrhované ponuky',
+                                        size: 18,
+                                      ),
+                                    ),
+                                    ..._rents.map((rent) {
+                                      return GestureDetector(
+                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () => {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/accommodationDetail',
+                                            arguments: AccommodationDetailArgs(
+                                                rent.id),
+                                          ),
+                                        },
+                                        child: CustomCard(
+                                          name: '${rent.rentType}',
+                                          address:
+                                              '${rent.street} ${rent.houseNumber}, ${rent.city}',
+                                          state: '${rent.rentState}',
+                                          price: rent.pricePerPerson
+                                              .toInt()
+                                              .toString(),
+                                          flatUrl: '${rent.photo}',
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 16),
-                            child: VarText(
-                              text: 'Navrhované ponuky',
-                              size: 18,
-                            ),
-                          ),
-                          CustomCard(
-                            name: 'Kfdshkjfhdskjf',
-                            price: '420.00',
-                            state: '',
-                            flatUrl:
-                                'https://psgroup.in/blog/wp-content/uploads/2021/03/pexels-curtis-adams-5178052-1024x683.jpg',
-                            address: 'Hronska 205/11',
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
+              )
+            : Container();
   }
 }
 

@@ -17,6 +17,10 @@ class Rent {
   final int numberOfOccupants;
   final String? photo;
   final String? description;
+  final double culture;
+  final double school;
+  final double green;
+  final double health;
 
   Rent(
     this.id,
@@ -37,6 +41,10 @@ class Rent {
     this.numberOfOccupants,
     this.photo,
     this.description,
+    this.culture,
+    this.school,
+    this.green,
+    this.health,
   );
 
   factory Rent.fromJson(Map<String, dynamic> json) {
@@ -59,6 +67,10 @@ class Rent {
       json['numberOfOccupants'],
       json['photo'],
       json['description'],
+      json['culture'],
+      json['school'],
+      json['green'],
+      json['health'],
     );
   }
 }

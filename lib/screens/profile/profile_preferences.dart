@@ -43,7 +43,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
   int newValue = 0;
 
   late WebService _webService;
-  String loggedUser = 'c459e3a9-3152-4953-a972-e4130a8323df';
+  String loggedUser = '594694fd-0e1c-4ece-802f-ea4614681172';
   RentPreferences? _rentPreferences;
   bool _isError = false;
 
@@ -154,7 +154,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       padding:
                                           EdgeInsets.fromLTRB(16, 8, 16, 0),
                                       child: VarText(
-                                        text: 'Davidko Hresko',
+                                        text: 'Viliam Korba',
                                         size: 24,
                                         color: AppColors.primary,
                                       )),
@@ -163,7 +163,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       padding:
                                           EdgeInsets.fromLTRB(16, 8, 16, 0),
                                       child: VarText(
-                                        text: 'david.hresko@gmail.com',
+                                        text: 'viliam.korba@gmail.com',
                                         size: 16,
                                         color: AppColors.secondary,
                                       )),

@@ -1,15 +1,15 @@
-import 'package:living_app/models/enums/building.dart';
+import 'package:living_app/models/preferences.dart';
 
 class LocationUser {
   final String id;
   final String firstName;
-  final String surName;
+  final String lastName;
   final String photo;
 
   LocationUser(
     this.id,
     this.firstName,
-    this.surName,
+    this.lastName,
     this.photo,
   );
 
@@ -17,38 +17,29 @@ class LocationUser {
     return LocationUser(
       json['id'],
       json['firstName'],
-      json['surName'],
+      json['lastName'],
       json['photo'],
     );
   }
 }
 
 class People {
-  final String id;
-  final String location;
   final List<LocationUser> users;
-  final BuildingType type;
-  final double price;
+  final RentPreferences rentPreferences;
 
   People(
-    this.id,
-    this.location,
     this.users,
-    this.type,
-    this.price,
+    this.rentPreferences,
   );
 
   factory People.fromJson(Map<String, dynamic> json) {
-    var users = json['users'] as List;
+    var users = json['customers'] as List;
     List<LocationUser> usersParsed =
         users.map((i) => LocationUser.fromJson(i)).toList();
 
     return People(
-      json['id'],
-      json['location'],
       usersParsed,
-      BuildingType.values.byName(json['type']),
-      json['price'],
+      RentPreferences.fromJson(json['rentPreferences']),
     );
   }
 }
