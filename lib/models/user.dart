@@ -24,7 +24,7 @@ class User {
     return User(
       json['id'],
       json['firstName'],
-      json['surName'],
+      json['lastName'],
       json['email'],
       json['birthDate'] != null
           ? DateFormat('dd.MM.yyyy').format(DateTime.parse(json['birthDate']))

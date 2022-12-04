@@ -25,7 +25,7 @@ class _FirstWizardState extends State<FirstWizard> {
         children: [
           const ActionBar(),
           const Header(text: '1. Typ bývania'),
-          const SubHeader(text: 'Vyber si ako chceš bývať'),
+          const SubHeader(text: 'Ako by si chcel bývať ?'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(

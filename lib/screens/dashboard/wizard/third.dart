@@ -30,7 +30,7 @@ class _ThirdWizardState extends State<ThirdWizard> {
         children: [
           const ActionBar(),
           const Header(text: '3. Cena'),
-          const SubHeader(text: 'Vyber si za koľko chceš bývať'),
+          const SubHeader(text: 'Za koľko by si chcel bývať ?'),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -53,7 +53,7 @@ class _ThirdWizardState extends State<ThirdWizard> {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    '/thirdWizard',
+                    '/fourthWizard',
                   );
                 },
               ),
