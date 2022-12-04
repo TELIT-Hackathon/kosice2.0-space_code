@@ -82,6 +82,7 @@ class CustomCard extends StatelessWidget {
                           children: [
                             Row(
                               children: [
+                                Icon(Icons.house_outlined,size: 18, color: AppColors.secondary,),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     left: 4,
@@ -96,10 +97,10 @@ class CustomCard extends StatelessWidget {
                             ),
                             Row(
                               children: [
+                                Icon(Icons.handyman_outlined,size: 18, color: AppColors.secondary,),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 4,
-                                  ),
+                                  padding:
+                                      const EdgeInsets.only(left: 4, top: 4),
                                   child: VarText(
                                     textAlign: TextAlign.left,
                                     text: state,
@@ -109,24 +110,21 @@ class CustomCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Column(
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 4,
-                                        bottom: 4,
-                                        left: 4,
-                                      ),
-                                      child: VarText(
-                                        textAlign: TextAlign.left,
-                                        text: address,
-                                        color: AppColors.secondary,
-                                        size: 12,
-                                      ),
-                                    ),
-                                  ],
+                                Icon(Icons.pin_drop_outlined,size: 18, color: AppColors.secondary,),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 4,
+                                    bottom: 4,
+                                    left: 4,
+                                  ),
+                                  child: VarText(
+                                    textAlign: TextAlign.left,
+                                    text: address,
+                                    color: AppColors.secondary,
+                                    size: 12,
+                                  ),
                                 ),
                               ],
                             ),
