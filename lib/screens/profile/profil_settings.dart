@@ -67,7 +67,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   BasicInput(
                     controller: _firstNameController,
-                    placeholder: 'Janko',
+                    placeholder: 'Davidko',
                     icon: const Icon(
                       Icons.person_rounded,
                       color: AppColors.secondary,
@@ -75,7 +75,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   BasicInput(
                     controller: _surNameController,
-                    placeholder: 'Hrasko',
+                    placeholder: 'Hresko',
                     icon: const Icon(
                       Icons.person_rounded,
                       color: AppColors.secondary,
@@ -84,7 +84,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   BasicInput(
                     textCapitalization: TextCapitalization.none,
                     controller: _emailController,
-                    placeholder: 'Janko.Hrasko@gmail.com',
+                    placeholder: 'david.hresko@gmail.com',
                     icon: const Icon(
                       Icons.email_rounded,
                       color: AppColors.secondary,

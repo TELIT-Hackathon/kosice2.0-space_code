@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
+import 'package:living_app/widgets/texts/rich_text.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 
 class ProfilePreferences extends StatefulWidget {
@@ -36,6 +37,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
 
   double value = 0;
   double _value = 0;
+  int newValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                               padding: EdgeInsets.fromLTRB(16, 8, 0, 8),
                               child: CachedNetworkImage(
                                 cacheKey: '_userData!.ph',
-                                imageUrl: 'https://a.pinatafarm.com/312x296/ae7f8ccd22/sad-thumbs-up-cat.jpg/m/522x0',
+                                imageUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600',
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
                                       width: 128,
@@ -71,12 +73,13 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                               ),
                             )
                         ),
+
                         Container(alignment: Alignment.centerLeft,
                             padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
-                            child: VarText(text: 'Ahoj, volám sa ', size: 18, color: AppColors.secondary,)),
+                            child: VarText(text: 'Davidko Hresko', size: 24, color: AppColors.primary,)),
                         Container(alignment: Alignment.centerLeft,
                             padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
-                            child: VarText(text: 'Janko Hrasko', size: 24, color: AppColors.primary,)),
+                            child: VarText(text: 'david.hresko@gmail.com', size: 16, color: AppColors.secondary,)),
                         Padding(
                           padding:  EdgeInsets.only(top: 4),
                           child: Divider(
@@ -85,23 +88,16 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                             color: AppColors.secondary,
                           ),
                         ),
-                        
+
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
                           child: VarText(text: 'Preferencie', size: 21),
                         ),
-                        Divider(
-                          indent: 16,
-                          endIndent: 16,
-                          color: AppColors.secondary,
-                        ),
+                       
 
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.fromLTRB(16, 8, 0,0),
-                        child: VarText(text: 'Cena do $_value €', size: 21),
-                      ),
+                       RichTextCustom(alignment: Alignment.center ,size: 21, firstText: 'Cena mesačne do ', secondText: '$newValue €',),
+
                       Slider.adaptive(
                         activeColor: AppColors.primary,
                         inactiveColor: AppColors.secondary.withOpacity(0.1),
@@ -110,13 +106,28 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                         value: _value,
                         onChanged: (value) {
                         setState(() {
-                        _value = double.parse((value).toStringAsFixed(2));
+                        _value = value;
+                        newValue = _value.toInt();
                         });
                         },),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
-                          child: VarText(text: 'Typ bývania', size: 21),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0, left: 16),
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.house_outlined,
+                                color: AppColors.secondary,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: VarText(
+                                  color: AppColors.secondary,
+                                  text: 'Typ bývania',
+                                  size: 21,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
@@ -173,10 +184,24 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                           ],
                         ),
 
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
-                          child: VarText(text: 'Lokalita', size: 21),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0, left: 16),
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.pin_drop_outlined,
+                                color: AppColors.secondary,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: VarText(
+                                  color: AppColors.secondary,
+                                  text: 'Lokalita',
+                                  size: 21,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
 
                         Row(
@@ -317,10 +342,24 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     ),
                                   ),
 
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
-                                    child: VarText(text: 'Vzdelanie', size: 21,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.menu_book_outlined,
+                                          color: AppColors.secondary,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 4.0),
+                                          child: VarText(
+                                            color: AppColors.secondary,
+                                            text: 'Vzdelanie',
+                                            size: 21,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
 
                                   Row(
@@ -394,10 +433,24 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                             ),
                                           ),
 
-                                          Container(
-                                            alignment: Alignment.centerLeft,
-                                            padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
-                                            child: VarText(text: 'Doprava', size: 21),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                            child: Row(
+                                              children: const [
+                                                Icon(
+                                                  Icons.directions_bus_filled_outlined,
+                                                  color: AppColors.secondary,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(left: 4.0),
+                                                  child: VarText(
+                                                    color: AppColors.secondary,
+                                                    text: 'Doprava',
+                                                    size: 21,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
 
                                           Padding(
@@ -470,10 +523,24 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                           ),
 
 
-                                          Container(
-                                            alignment: Alignment.centerLeft,
-                                            padding: const EdgeInsets.fromLTRB(16, 8, 0,0),
-                                            child: VarText(text: 'Voľný čas', size: 21),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                            child: Row(
+                                              children: const [
+                                                Icon(
+                                                  Icons.sports_football_outlined,
+                                                  color: AppColors.secondary,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(left: 4.0),
+                                                  child: VarText(
+                                                    color: AppColors.secondary,
+                                                    text: 'Voľný čas',
+                                                    size: 21,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
 
                                           Padding(

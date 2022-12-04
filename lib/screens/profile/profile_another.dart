@@ -66,7 +66,7 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
                           child: VarText(
-                            text: 'Janko Hrasko',
+                            text: 'Davidko Hresko',
                             size: 24,
                             color: AppColors.primary,
                           )),
@@ -80,23 +80,33 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                         child: VarText(text: 'Preferencie', size: 21),
                       ),
-                      Divider(
-                        indent: 16,
-                        endIndent: 16,
-                        color: AppColors.secondary,
-                      ),
+                      
                       RichTextCustom(
                         firstText: 'Cena do ',
                         secondText: '150 €',
                         size: 21,
                       ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
-                        child: VarText(text: 'Typ bývania', size: 21),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, left: 16),
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.house_outlined,
+                              color: AppColors.secondary,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 4.0),
+                              child: VarText(
+                                color: AppColors.secondary,
+                                text: 'Typ bývania',
+                                size: 21,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Row(
                         children: [
@@ -127,11 +137,24 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 8, 0, 8),
-                                  child: VarText(text: 'Lokalita', size: 21),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                  child: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.pin_drop_outlined,
+                                        color: AppColors.secondary,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 4.0),
+                                        child: VarText(
+                                          color: AppColors.secondary,
+                                          text: 'Lokalita',
+                                          size: 21,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Row(children: [
                                   Expanded(
@@ -186,13 +209,23 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        padding: const EdgeInsets.fromLTRB(
-                                            16, 8, 0, 8),
-                                        child: VarText(
-                                          text: 'Vzdelanie',
-                                          size: 21,
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16.0, left: 16),
+                                        child: Row(
+                                          children: const [
+                                            Icon(
+                                              Icons.menu_book_outlined,
+                                              color: AppColors.secondary,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(left: 4.0),
+                                              child: VarText(
+                                                color: AppColors.secondary,
+                                                text: 'Vzdelanie',
+                                                size: 21,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       Row(
@@ -247,10 +280,24 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                         ],
                       ),
 
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
-                        child: VarText(text: 'Doprava', size: 21),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, left: 16),
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.directions_bus_filled_outlined,
+                              color: AppColors.secondary,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 4.0),
+                              child: VarText(
+                                color: AppColors.secondary,
+                                text: 'Doprava',
+                                size: 21,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
 
                       Padding(
@@ -275,10 +322,24 @@ class _ProfileAnotherState extends State<ProfileAnother> {
                       ),
 
 
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.fromLTRB(16, 8, 0,0),
-                        child: VarText(text: 'Voľný čas', size: 21),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, left: 16),
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.sports_football_outlined,
+                              color: AppColors.secondary,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 4.0),
+                              child: VarText(
+                                color: AppColors.secondary,
+                                text: 'Voľný čas',
+                                size: 21,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
 
 
