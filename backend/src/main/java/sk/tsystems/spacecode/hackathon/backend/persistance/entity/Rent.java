@@ -21,22 +21,25 @@ public class Rent {
     @GeneratedValue
     private UUID id;
     @Column(length=Integer.MAX_VALUE)
-    String name;
+    private String name;
     @Column(length=Integer.MAX_VALUE)
-    String description;
-    String rentType;
-    String city;
-    String cityPart;
-    String street;
-    String houseNumber;
-    Float latitude;
-    Float longitude;
-    Float pricePerPerson;
-    Float pricePerArea;
-    String rentState;
-    Float squaredMeters;
-    Integer numberOfRooms;
-    Integer numberOfOccupants;
-    String photo;
-
+    private String description;
+    private String rentType;
+    private String city;
+    private String cityPart;
+    private String street;
+    private String houseNumber;
+    private Float latitude;
+    private Float longitude;
+    private Float pricePerPerson;
+    private Float pricePerArea;
+    private String rentState;
+    private Float squaredMeters;
+    private Integer numberOfRooms;
+    private Integer numberOfOccupants;
+    private String photo;
+    private Float school;
+    private Float culture;
+    private Float green;
+    private Float health;
 }

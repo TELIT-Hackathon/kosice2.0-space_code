@@ -10,6 +10,7 @@ public record CustomerDto(UUID id,
                           String birthDate,
                           String email,
                           Gender gender,
-                          String photo
+                          String photo,
+                          RentPreferencesDto rentPreferences
 ) {
 }

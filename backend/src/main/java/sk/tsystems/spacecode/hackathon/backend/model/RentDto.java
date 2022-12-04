@@ -19,7 +19,11 @@ public record RentDto(UUID id,
                       Float squaredMeters,
                       Integer numberOfRooms,
                       Integer numberOfOccupants,
-                      String photo
+                      String photo,
+                      Float school,
+                      Float culture,
+                      Float green,
+                      Float health
 
 ) {
 }

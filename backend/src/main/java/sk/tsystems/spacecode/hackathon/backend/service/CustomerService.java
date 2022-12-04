@@ -1,6 +1,7 @@
 package sk.tsystems.spacecode.hackathon.backend.service;
 
 import sk.tsystems.spacecode.hackathon.backend.model.CustomerDto;
+import sk.tsystems.spacecode.hackathon.backend.model.CustomerGroupDto;
 import sk.tsystems.spacecode.hackathon.backend.model.RentPreferencesDto;
 import sk.tsystems.spacecode.hackathon.backend.model.response.ResponseEntity;
 
@@ -15,4 +16,6 @@ public interface CustomerService {
     ResponseEntity<RentPreferencesDto> getCustomerPreferences(UUID id);
 
     ResponseEntity<String> addRentPreferences(UUID id, RentPreferencesDto rentPreferencesDto);
+
+    ResponseEntity<CustomerGroupDto> findCustomerGroup(UUID id);
 }

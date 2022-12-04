@@ -22,6 +22,7 @@ public class Customer {
     private String birthDate;
     private String email;
     private Gender gender;
+    @Column(length=Integer.MAX_VALUE)
     private String photo;
     @OneToOne(fetch = FetchType.LAZY)
     private RentPreferences rentPreferences;
