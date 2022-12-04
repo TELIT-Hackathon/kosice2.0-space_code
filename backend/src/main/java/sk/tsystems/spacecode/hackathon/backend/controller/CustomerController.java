@@ -3,6 +3,7 @@ package sk.tsystems.spacecode.hackathon.backend.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sk.tsystems.spacecode.hackathon.backend.model.CustomerDto;
+import sk.tsystems.spacecode.hackathon.backend.model.RentPreferencesDto;
 import sk.tsystems.spacecode.hackathon.backend.model.response.ResponseEntity;
 import sk.tsystems.spacecode.hackathon.backend.service.CustomerService;
 
@@ -25,4 +26,16 @@ public class CustomerController {
     public ResponseEntity<String> createCustomer(@RequestBody CustomerDto customerDto) {
         return customerService.createCustomer(customerDto);
     }
+
+    @GetMapping("/{id}/preferences")
+    public ResponseEntity<RentPreferencesDto> getCustomerPreferences(@PathVariable UUID id){
+        return customerService.getCustomerPreferences(id);
+    }
+
+    @PostMapping("/{customerId}/preferences")
+    public ResponseEntity<String> createCustomerPreferences(@PathVariable UUID customerId,
+                                                            @RequestBody RentPreferencesDto rentPreferencesDto) {
+        return customerService.addRentPreferences(customerId, rentPreferencesDto);
+    }
+
 }
