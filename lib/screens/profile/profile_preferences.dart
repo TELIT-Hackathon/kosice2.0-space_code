@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/button.dart';
@@ -6,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
-import 'package:living_app/widgets/texts/sub_header.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
 
 class ProfilePreferences extends StatefulWidget {
@@ -29,6 +27,12 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
   bool isChecked9 = false;
   bool isChecked10 = false;
   bool isChecked11 = false;
+  bool isChecked12 = false;
+  bool isChecked13 = false;
+  bool isChecked14 = false;
+  bool isChecked15 = false;
+  bool isChecked16 = false;
+  bool isChecked17 = false;
 
   double value = 0;
   double _value = 0;
@@ -82,9 +86,10 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                           ),
                         ),
                         
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SubHeader(text: 'Preferencie'),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
+                          child: VarText(text: 'Preferencie', size: 21),
                         ),
                         Divider(
                           indent: 16,
@@ -92,9 +97,10 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                           color: AppColors.secondary,
                         ),
 
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: SubHeader(text: 'Cena do $_value €'),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.fromLTRB(16, 8, 0,0),
+                        child: VarText(text: 'Cena do $_value €', size: 21),
                       ),
                       Slider.adaptive(
                         activeColor: AppColors.primary,
@@ -107,9 +113,10 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                         _value = double.parse((value).toStringAsFixed(2));
                         });
                         },),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SubHeader(text: 'Typ b7vania'),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
+                          child: VarText(text: 'Typ bývania', size: 21),
                         ),
                         Row(
                           children: [
@@ -121,7 +128,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
+                                        padding: const EdgeInsets.only(left: 16.0),
                                         child: VarText(text: 'Samostatne'),
                                       ),
                                       Padding(
@@ -144,7 +151,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
+                                        padding: const EdgeInsets.only(left: 16.0),
                                         child: VarText(text: 'Zdieľane'),
                                       ),
                                       Padding(
@@ -166,9 +173,10 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                           ],
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SubHeader(text: 'Lokalita'),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
+                          child: VarText(text: 'Lokalita', size: 21),
                         ),
 
                         Row(
@@ -182,7 +190,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
+                                            padding: const EdgeInsets.only(left: 16.0),
                                             child: VarText(text: 'Košice-Barca'),
                                           ),
                                         Padding(
@@ -204,7 +212,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding: const EdgeInsets.only(left: 16.0),
                                           child: VarText(text: 'Košice-Juh'),
                                         ),
                                         Padding(
@@ -226,7 +234,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding: const EdgeInsets.only(left: 16.0),
                                           child: VarText(text: 'Košice-Sever'),
                                         ),
                                         Padding(
@@ -248,7 +256,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding: const EdgeInsets.only(left: 16.0),
                                           child: VarText(text: 'Košice-Staré Mesto'),
                                         ),
                                         Padding(
@@ -270,7 +278,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding: const EdgeInsets.only(left: 16.0),
                                           child: VarText(text: 'Košice-Ťahanovce'),
                                         ),
                                         Padding(
@@ -292,7 +300,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
+                                          padding: const EdgeInsets.only(left: 16.0),
                                           child: VarText(text: 'Košice-Západ'),
                                         ),
                                         Padding(
@@ -309,9 +317,10 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                     ),
                                   ),
 
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: SubHeader(text: 'Vzdelanie'),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
+                                    child: VarText(text: 'Vzdelanie', size: 21,),
                                   ),
 
                                   Row(
@@ -324,7 +333,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  padding: const EdgeInsets.only(left: 16.0),
                                                   child: VarText(text: 'Materská škola'),
                                                 ),
                                                 Padding(
@@ -346,7 +355,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  padding: const EdgeInsets.only(left: 16.0),
                                                   child: VarText(text: 'Základná škola'),
                                                 ),
                                                 Padding(
@@ -368,7 +377,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  padding: const EdgeInsets.only(left: 16.0),
                                                   child: VarText(text: 'Stredná škola'),
                                                 ),
                                                 Padding(
@@ -385,13 +394,157 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                                             ),
                                           ),
 
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 8.0),
-                                            child: SubHeader(text: 'Doprava'),
+                                          Container(
+                                            alignment: Alignment.centerLeft,
+                                            padding: const EdgeInsets.fromLTRB(16, 8, 0,8),
+                                            child: VarText(text: 'Doprava', size: 21),
                                           ),
-                                          
 
-                                          
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'MHD'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked12,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked12 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'Vlastná (nemotorová)'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked17,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked17 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'Vlastná (motorová)'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked13,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked13 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+
+                                          Container(
+                                            alignment: Alignment.centerLeft,
+                                            padding: const EdgeInsets.fromLTRB(16, 8, 0,0),
+                                            child: VarText(text: 'Voľný čas', size: 21),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'Divadlá'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked14,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked14 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'Kiná'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked15,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked15 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16.0, top: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 16.0),
+                                                  child: VarText(text: 'Športové ihriská'),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Checkbox(value: isChecked16,
+                                                      activeColor: AppColors.primary,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          isChecked16 = value!;
+                                                        });}
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
                                         ],
 
                                       ),),
@@ -412,7 +565,7 @@ class _ProfilePreferencesState extends State<ProfilePreferences> {
                   ]
               ),
             ),
-            Button(text: 'Nadviazať kontakt', color: AppColors.primary, onPressed: () {} ),
+            Button(text: 'Uložiť', color: AppColors.primary, onPressed: () {} ),
           ],
 
         )

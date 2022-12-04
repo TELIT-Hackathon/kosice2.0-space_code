@@ -143,7 +143,11 @@ class _AccommodationDetailState extends State<AccommodationDetail> {
                                       ),
                                     ),
                                     ActionButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context,
+                                            '/profileAnother',);
+                                      },
                                       color: AppColors.primary,
                                       text: 'Kontaktovať',
                                     ),

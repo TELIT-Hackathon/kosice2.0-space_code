@@ -11,6 +11,7 @@ import 'package:living_app/screens/people/people.dart';
 import 'package:living_app/screens/people/people_detail.dart';
 import 'package:living_app/screens/profile/profil_settings.dart';
 import 'package:living_app/screens/profile/profile.dart';
+import 'package:living_app/screens/profile/profile_another.dart';
 import 'package:living_app/screens/profile/profile_preferences.dart';
 import 'package:living_app/utils/colors.dart';
 
@@ -77,6 +78,7 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
         '/profile': (context) => const ProfileScreen(),
         '/profilePreferences': (context) => const ProfilePreferences(),
         '/profileSettings': (context) => const ProfileSettings(),
+        '/profileAnother': (context) => const ProfileAnother(),
       },
     );
   }
