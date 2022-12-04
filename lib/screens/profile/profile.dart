@@ -24,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
   late List<Widget> _optionsList;
   late WebService _webService;
-  String loggedUser = '5224de3f-23d0-49ba-8ff4-b22698f73921';
+  String loggedUser = 'c459e3a9-3152-4953-a972-e4130a8323df';
   User? _userData;
   bool _isError = false;
 
@@ -69,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
               title: 'Kontakt',
               subTitle: 'Napíš nám',
               route: '/contact',
+              addDivider: false,
             ),
             const ListTitle(text: 'Iné'),
             const Option(

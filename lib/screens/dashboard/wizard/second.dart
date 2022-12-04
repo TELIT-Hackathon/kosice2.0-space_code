@@ -29,7 +29,7 @@ class _SecondWizardState extends State<SecondWizard> {
         children: [
           const ActionBar(),
           const Header(text: '2. Lokalita'),
-          const SubHeader(text: 'Vyber si kde chceš bývať'),
+          const SubHeader(text: 'Kde by si chcel bývať ?'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(

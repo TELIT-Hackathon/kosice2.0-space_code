@@ -23,9 +23,9 @@ class _PeopleScreenState extends State<PeopleScreen> {
   Widget build(BuildContext context) {
     return const Parent(
       child: TabbedHeader(
-        title: 'Ľudia',
+        title: 'Skupiny',
         tabTitles: [
-          'Návrhy',
+          'Návrhované',
           'Uložené',
         ],
         actions: [],
