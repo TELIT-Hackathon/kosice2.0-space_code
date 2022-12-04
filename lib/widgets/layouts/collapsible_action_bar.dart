@@ -3,7 +3,6 @@ import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/back_arrow.dart';
 import 'package:sliver_header_delegate/sliver_header_delegate.dart';
 
-
 class CollapsibleActionBar extends StatelessWidget {
   final Widget body;
   final String title;
@@ -41,8 +40,7 @@ class CollapsibleActionBar extends StatelessWidget {
                 expandedWidget: background,
                 collapsedColor: AppColors.primary,
               ),
-              backgroundColor:
-              background != null ? null : AppColors.defaultColor,
+              backgroundColor: background != null ? null : AppColors.white,
               statusBarHeight: MediaQuery.of(context).padding.top,
               actions: actions,
               children: [
@@ -58,14 +56,14 @@ class CollapsibleActionBar extends StatelessWidget {
                   expandedPadding: const EdgeInsets.fromLTRB(16, 0, 0, 8),
                   expandedStyle: TextStyle(
                     color:
-                    background != null ? AppColors.white : AppColors.black,
+                        background != null ? AppColors.white : AppColors.black,
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
                   ),
                   collapsedStyle: TextStyle(
                     color:
-                    background != null ? AppColors.white : AppColors.black,
+                        background != null ? AppColors.white : AppColors.black,
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.bold,
                     fontSize: 21,

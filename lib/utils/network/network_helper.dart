@@ -8,18 +8,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:living_app/utils/network/exceptions/app_exception.dart';
 
 class ApiBaseHelper {
-  static const _backendBaseUrlRaw = '317d-147-232-39-52.eu.ngrok.io';
-  static const _backendBaseUrl = 'https://$_backendBaseUrlRaw/';
+  static const _backendBaseUrlRaw = '192.168.233.82:8080';
+  static const _backendBaseUrl = 'http://$_backendBaseUrlRaw/';
 
   Future<dynamic> get(String path, {Map<String, String>? queryParams}) async {
     var responseJson;
-    var uri = Uri.https(_backendBaseUrlRaw, path, queryParams);
-
+    var uri = Uri.http(_backendBaseUrlRaw, path, queryParams);
     try {
       final response = await http.get(
         uri,
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
+          'Content-Type': 'application/json',
+          'Host': _backendBaseUrlRaw
         },
       );
       responseJson = await _returnResponse(path, response);

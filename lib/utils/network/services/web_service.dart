@@ -1,3 +1,4 @@
+import 'package:living_app/models/rent.dart';
 import 'package:living_app/models/user.dart';
 import 'package:living_app/utils/network/network_helper.dart';
 
@@ -20,9 +21,18 @@ class WebService {
 //   );
 // }
 
+  Future<List<Rent>> getRents() async {
+    final response = await _helper.get(
+      "rent/all",
+    );
+    var rents = response['content'] as List;
+
+    return rents.map((e) => Rent.fromJson(e)).toList();
+  }
+
   Future<User> getUserDetail(String userId) async {
     final response = await _helper.get(
-      "customer/${userId}",
+      "customer/$userId",
     );
     return User.fromJson(response['content']);
   }

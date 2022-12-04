@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:living_app/main.dart';
+import 'package:living_app/models/rent.dart';
+import 'package:living_app/utils/colors.dart';
+import 'package:living_app/utils/network/request_helper.dart';
+import 'package:living_app/utils/network/services/web_service.dart';
+import 'package:living_app/widgets/inputs/search_input.dart';
 import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/minors/custom_home_card.dart';
-import 'package:living_app/widgets/inputs/search_input.dart';
 import 'package:living_app/widgets/texts/header.dart';
-
+import 'package:living_app/widgets/texts/var_text.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -12,13 +17,41 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
   late TextEditingController _searchController;
+  late WebService _webService;
+  List<Rent> _rents = [];
+
+  void _updateScreen(bool isInit) {
+    if (isInit) onLoading(context);
+    _webService.getRents().then(
+      (res) {
+        if (isInit) Navigator.pop(context);
+        setState(
+          () {
+            _rents = res;
+          },
+        );
+      },
+    ).onError(
+      (error, stackTrace) {
+        onError(context, error.toString(), isInit);
+      },
+    );
+  }
 
   @override
   void initState() {
     super.initState();
+    _webService = WebService();
     _searchController = TextEditingController();
+    _updateScreen(true);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
   }
 
   @override
@@ -36,23 +69,79 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
           const Header(text: 'Ponuky pre teba'),
-
-          GestureDetector(
-              child: CustomCard(
-                  name: 'trojizbovy byts',
-                  address: 'hronska 69',
-                  price: 200.0,
-                  flatUrl: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),
-            behavior: HitTestBehavior.translucent,
-            onTap: () => {
-              Navigator.pushNamed(
-                context,
-                '/accomodationDetail',
-                                ),
-            },
-          )
+          _rents.isNotEmpty
+              ? Expanded(
+                  child: RefreshIndicator(
+                    backgroundColor: AppColors.white,
+                    color: AppColors.primary,
+                    onRefresh: () async {
+                      _updateScreen(false);
+                    },
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
+                      itemCount: _rents.length + 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () => {
+                            Navigator.pushNamed(
+                              context,
+                              '/accomodationDetail',
+                            ),
+                          },
+                          child: CustomCard(
+                            name: '${_rents[index].name?.substring(0, 18)}',
+                            address:
+                                '${_rents[index].street} ${_rents[index].houseNumber}, ${_rents[index].city}',
+                            price:
+                                _rents[index].pricePerPerson.toInt().toString(),
+                            flatUrl: '${_rents[index].photo}',
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                )
+              : Expanded(
+                  child: RefreshIndicator(
+                    backgroundColor: AppColors.white,
+                    color: AppColors.primary,
+                    onRefresh: () async {
+                      _updateScreen(false);
+                    },
+                    child: const CustomScrollView(
+                      physics: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
+                      slivers: [
+                        SliverFillRemaining(
+                          child: Center(
+                            child: VarText(
+                              color: AppColors.tertiary,
+                              text: 'Nenašli sme pre teba žiadne ponuky :( ',
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
         ],
       ),
     );
+  }
+
+  @override
+  void didPopNext() {
+    // TODO doplnit api
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }
