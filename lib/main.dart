@@ -10,6 +10,7 @@ import 'package:living_app/screens/dashboard/wizard/third.dart';
 import 'package:living_app/screens/people/people.dart';
 import 'package:living_app/screens/people/people_detail.dart';
 import 'package:living_app/screens/profile/profile.dart';
+import 'package:living_app/screens/profile/profile_preferences.dart';
 import 'package:living_app/utils/colors.dart';
 
 Future<void> main() async {
@@ -73,6 +74,7 @@ class _LivingAppState extends State<LivingApp> with WidgetsBindingObserver {
         '/people': (context) => const PeopleScreen(),
         '/peopleDetail': (context) => const PeopleDetailScreen(),
         '/profile': (context) => const ProfileScreen(),
+        '/profilePreferences': (context) => const ProfilePreferences(),
       },
     );
   }
