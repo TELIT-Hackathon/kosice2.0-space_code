@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:living_app/models/preferences.dart';
+import 'package:living_app/screens/dashboard/wizard/second.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/button.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
@@ -141,10 +143,8 @@ class _FirstWizardState extends State<FirstWizard> {
                               child: DropdownCustom(
                                   title: 'Nezáleží',
                                   options: const [
-                                    'Slovenská',
-                                    'Ukrajinská',
-                                    'Maďarská',
-                                    'Česká'
+                                    'Domáca',
+                                    'Zahraničná',
                                   ],
                                   value: _pickedNationality,
                                   onChanged: (String? value) {
@@ -192,12 +192,23 @@ class _FirstWizardState extends State<FirstWizard> {
               child: Button(
                 color: AppColors.primary,
                 text: 'Ďalší krok',
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/secondWizard',
-                  );
-                },
+                onPressed: _isCheckedFirst || _isCheckedSecond
+                    ? () {
+                        Navigator.pushNamed(
+                          context,
+                          '/secondWizard',
+                          arguments: SecondWizardArgs(_isCheckedSecond
+                              ? RoommatePreferences(
+                                  _pickedNationality == 'Domáca'
+                                      ? 'DOMESTIC'
+                                      : 'INTERNATIONAL',
+                                  _currentRangeValues.start.toString(),
+                                  _currentRangeValues.end.toString(),
+                                  _pickedGender == 'Muž' ? 'MALE' : 'FEMALE')
+                              : null),
+                        );
+                      }
+                    : null,
               ),
             ),
           )

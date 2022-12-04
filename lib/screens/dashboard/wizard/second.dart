@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:living_app/models/preferences.dart';
+import 'package:living_app/screens/dashboard/wizard/third.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/button.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
@@ -6,6 +8,14 @@ import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/texts/header.dart';
 import 'package:living_app/widgets/texts/sub_header.dart';
 import 'package:living_app/widgets/texts/var_text.dart';
+
+class SecondWizardArgs {
+  final RoommatePreferences? roommatePreferences;
+
+  SecondWizardArgs(
+    this.roommatePreferences,
+  );
+}
 
 class SecondWizard extends StatefulWidget {
   const SecondWizard({Key? key}) : super(key: key);
@@ -21,9 +31,16 @@ class _SecondWizardState extends State<SecondWizard> {
   bool _isCheckedFourth = false;
   bool _isCheckedFifth = false;
   bool _isCheckedSixth = false;
+  late SecondWizardArgs _args;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _args = ModalRoute.of(context)!.settings.arguments as SecondWizardArgs;
     return Parent(
       child: Column(
         children: [
@@ -158,12 +175,27 @@ class _SecondWizardState extends State<SecondWizard> {
               child: Button(
                 color: AppColors.primary,
                 text: 'Ďalší krok',
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/thirdWizard',
-                  );
-                },
+                onPressed: _isCheckedFirst ||
+                        _isCheckedSecond ||
+                        _isCheckedThird ||
+                        _isCheckedFourth ||
+                        _isCheckedFifth ||
+                        _isCheckedSixth
+                    ? () {
+                        Navigator.pushNamed(
+                          context,
+                          '/thirdWizard',
+                          arguments: ThirdWizardArgs([
+                            if (_isCheckedFirst) 'Košice-Barca',
+                            if (_isCheckedSecond) 'Košice-Juh',
+                            if (_isCheckedThird) 'Košice-Sever',
+                            if (_isCheckedFourth) 'Košice-Staré Mesto',
+                            if (_isCheckedFifth) 'Košice-Ťahanovce',
+                            if (_isCheckedSixth) 'Košice-Západ',
+                          ], _args.roommatePreferences),
+                        );
+                      }
+                    : null,
               ),
             ),
           )

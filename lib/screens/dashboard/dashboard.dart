@@ -158,7 +158,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
 
   @override
   void didPopNext() {
-    // TODO doplnit api
+    _updateScreen(false);
   }
 
   @override

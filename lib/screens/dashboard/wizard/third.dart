@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:living_app/models/preferences.dart';
+import 'package:living_app/screens/dashboard/wizard/fourth.dart';
 import 'package:living_app/utils/colors.dart';
 import 'package:living_app/widgets/buttons/button.dart';
 import 'package:living_app/widgets/layouts/action_bar.dart';
@@ -6,6 +8,16 @@ import 'package:living_app/widgets/layouts/parent.dart';
 import 'package:living_app/widgets/texts/header.dart';
 import 'package:living_app/widgets/texts/rich_text.dart';
 import 'package:living_app/widgets/texts/sub_header.dart';
+
+class ThirdWizardArgs {
+  final List<String> locality;
+  final RoommatePreferences? roommatePreferences;
+
+  ThirdWizardArgs(
+    this.locality,
+    this.roommatePreferences,
+  );
+}
 
 class ThirdWizard extends StatefulWidget {
   const ThirdWizard({Key? key}) : super(key: key);
@@ -17,6 +29,7 @@ class ThirdWizard extends StatefulWidget {
 class _ThirdWizardState extends State<ThirdWizard> {
   double _value = 0;
   int newValue = 0;
+  late ThirdWizardArgs _args;
 
   @override
   void initState() {
@@ -25,6 +38,8 @@ class _ThirdWizardState extends State<ThirdWizard> {
 
   @override
   Widget build(BuildContext context) {
+    _args = ModalRoute.of(context)!.settings.arguments as ThirdWizardArgs;
+
     return Parent(
       child: Column(
         children: [
@@ -35,7 +50,7 @@ class _ThirdWizardState extends State<ThirdWizard> {
             padding: const EdgeInsets.only(top: 8.0),
             child: RichTextCustom(
                 alignment: Alignment.center,
-                firstText: 'do ',
+                firstText: 'mesačne do ',
                 secondText: '$newValue €'),
           ),
           Slider.adaptive(
@@ -57,12 +72,19 @@ class _ThirdWizardState extends State<ThirdWizard> {
               child: Button(
                 color: AppColors.primary,
                 text: 'Ďalší krok',
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/fourthWizard',
-                  );
-                },
+                onPressed: newValue > 0
+                    ? () {
+                        Navigator.pushNamed(
+                          context,
+                          '/fourthWizard',
+                          arguments: FourthWizardArgs(
+                            _args.locality,
+                            _args.roommatePreferences,
+                            newValue,
+                          ),
+                        );
+                      }
+                    : null,
               ),
             ),
           )

@@ -1,3 +1,4 @@
+import 'package:living_app/models/preferences.dart';
 import 'package:living_app/models/rent.dart';
 import 'package:living_app/models/user.dart';
 import 'package:living_app/utils/network/network_helper.dart';
@@ -5,21 +6,13 @@ import 'package:living_app/utils/network/network_helper.dart';
 class WebService {
   final ApiBaseHelper _helper = ApiBaseHelper();
 
-// Future<LoginToken> login(LoginUser loginUser) async {
-//   final response = await _helper.post(
-//     "auth/login",
-//     loginUser,
-//     doAuth: false,
-//   );
-//   return LoginToken.fromJson(response['content']);
-// }
-
-// Future<void> logout(LogoutDto logoutDto) async {
-//   await _helper.post(
-//     "auth/logout",
-//     logoutDto,
-//   );
-// }
+  Future<void> savePreferences(
+      RentPreferences preferences, String userId) async {
+    await _helper.post(
+      "customer/$userId/preferences",
+      preferences,
+    );
+  }
 
   Future<List<Rent>> getRents() async {
     final response = await _helper.get(
